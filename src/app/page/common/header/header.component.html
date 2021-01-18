@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
+  <a class="navbar-brand" href="#">MCSistemi Reader</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarCollapse"  >
+    <ul class="navbar-nav mr-auto">
+      
+      <div  *ngFor="let funzione of funzioni"> 
+      <li class="nav-item" >
+        <a class="nav-link" routerLink="{{funzione.path}}">{{funzione.descrizione}}</a>
+      </li>
+      </div>
+
+      <!--li class="nav-item">
+        <a class="nav-link" routerLink="/home">Home</a>
+      </li>
+      
+      <li class="nav-item" *ngIf="currentUser.hasFunzione('avvocato-grid')">
+        <a class="nav-link" routerLink="/avvocato-grid">Configura Reader</a>
+      </li> 
+      <li class="nav-item" *ngIf="currentUser.hasFunzione('avvocato-grid')">
+        <a class="nav-link" routerLink="/import-avvocato">Visulaizza Flusso</a>
+      </li>
+      <li class="nav-item" *ngIf="currentUser.hasFunzione('avvocato-grid')">
+        <a class="nav-link" routerLink="/invia-pec">Invia Pec</a>
+      </li>
+      <li class="nav-item" *ngIf="currentUser.hasFunzione('avvocato-grid')">
+        <a class="nav-link" routerLink="/invia-mail">Invia Mail</a>
+      </li-->
+
+
+    </ul>
+  </div>
+</nav>

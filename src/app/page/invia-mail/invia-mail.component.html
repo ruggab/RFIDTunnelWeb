@@ -1,0 +1,31 @@
+<div class="container" style="margin-top: 70px;">
+  
+<form [formGroup]="form" (ngSubmit)="submit()">
+      
+    <div class="form-group">
+        <label for="numMailDaInviare">Mail non inviate</label>
+        <input formControlName="numMailDaInviare"
+            id="numMailDaInviare" 
+            type="text" 
+            class="form-control" >
+        <div *ngIf="f.numMailDaInviare.touched && f.numMailDaInviare.invalid" class="alert alert-danger">
+            <div *ngIf="f.numMailDaInviare.errors && f.numMailDaInviare.errors.required">Mail da inviare is required.</div>
+        </div>
+    </div>
+   
+    <div class="form-group">
+        <label for="numMailSel">Seleziona Mail da inviare:</label>
+        <select formControlName="numMailSel" class="form-control" (change)="changeNumMailSel($event)">
+            <option disabled>Seleziona Num Mail da inviare</option>
+            
+            <option *ngFor="let numMail of numMailList">{{numMail}}</option>
+        </select>
+        <div *ngIf="f.numMailSel.touched && f.numMailSel.invalid" class="alert alert-danger">
+            <div *ngIf="f.numMailSel.errors && f.numMailSel.errors.required">NumMailSel è obbligatorio</div>
+        </div>
+    </div>    
+  
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+</div>
