@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AvvocatoGridComponent } from './avvocato-grid.component';
+import { ConfReaderComponent } from './confreader.component';
 
-describe('AvvocatoGridComponent', () => {
-  let component: AvvocatoGridComponent;
-  let fixture: ComponentFixture<AvvocatoGridComponent>;
+describe('ConfReaderComponent', () => {
+  let component: ConfReaderComponent;
+  let fixture: ComponentFixture<ConfReaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AvvocatoGridComponent ]
+      declarations: [ ConfReaderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AvvocatoGridComponent);
+    fixture = TestBed.createComponent(ConfReaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

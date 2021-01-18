@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
 import { User } from '../../entity/user';
+import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent} from '../common/modal/modal.component'
+import {  HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-login',
@@ -22,6 +25,7 @@ export class LoginComponent implements OnInit {
     
 
     constructor(
+        public modalService: NgbModal,
         private router: Router,
         private authenticationService: AuthenticationService
     ) {}
@@ -64,6 +68,18 @@ export class LoginComponent implements OnInit {
                 error => {
                     console.log(error);
                     this.loading = false;
+                    this.openErrorDialog(error);
                 });
     }
+
+
+
+    openErrorDialog(error:HttpErrorResponse) {
+        const modalRef = this.modalService.open(ModalComponent);
+        modalRef.componentInstance.title = 'Error';
+        //let err = JSON.stringify(error);
+        //error = JSON.parse(err);
+        modalRef.componentInstance.msg = error.message;
+        ;
+      }
 }

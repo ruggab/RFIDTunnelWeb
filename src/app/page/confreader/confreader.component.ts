@@ -5,59 +5,58 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
 
 @Component({
-  selector: 'app-invia-pec',
-  templateUrl: './invia-pec.component.html',
-  styleUrls: ['./invia-pec.component.css']
+  selector: 'app-confreader',
+  templateUrl: './confreader.component.html',
+  styleUrls: ['./confreader.component.css']
 })
-export class InviaPecComponent implements OnInit {
-  numPecList: any = ['10', '100', '1000']
+export class ConfReaderComponent implements OnInit {
+  numMailList: any = ['10', '100', '1000']
 
-  constructor(private avvocatoService: AvvocatoService, public modalService: NgbModal) { }
+  constructor(public modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.onload();
   }
 
   form = new FormGroup({
-    numPecDaInviare: new FormControl('', [Validators.required]),
-    numPecSel: new FormControl('', [Validators.required])
-   
+    numMailDaInviare: new FormControl('', [Validators.required]),
+    numMailSel: new FormControl('', [Validators.required])
   });
   
+
   get f(){
     return this.form.controls;
   }
 
-
-  changeNumPecSel(event:Event) {
+  changeNumMailSel(event:Event) {
     console.log(event.target);
   }
 
   onload() {
-    this.avvocatoService.getNumPecDaInviare().subscribe(
+    /*this.avvocatoService.getNumMailDaInviare().subscribe(
       data => {
-        this.form.setValue({numPecDaInviare: data, numPecSel:"10"});
+        this.form.setValue({numMailDaInviare: data, numMailSel:"10"});
         
         console.log(data);
       },
-      error => console.log(error));
+      error => console.log(error));*/
   }
   
   submit(){
     console.log(this.form.value);
     const inviaForm = {
-      numPecDaInviare: this.form.controls.numPecDaInviare.value, 
-      numPecSel: this.form.controls.numPecSel.value
+      numMailDaInviare: this.form.controls.numMailDaInviare.value, 
+      numMailSel: this.form.controls.numMailSel.value
     };
-    this.inviaPec(inviaForm)
+    this.inviaMail(inviaForm)
   }
 
 
-  inviaPec(inviaForm:Object) {
-    this.avvocatoService.inviaPec(inviaForm).subscribe(
-        data => {this.openDialog()},
-        error => {this.openErrorDialog()}
-    );
+  inviaMail(inviaForm:Object) {
+    // this.avvocatoService.inviaMail(inviaForm).subscribe(
+    //     data => {this.openDialog()},
+    //     error => {this.openErrorDialog()}
+    // );
   }
 
   openDialog() {
