@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/entity/user';
 import { Funzione } from 'src/app/entity/user';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +11,10 @@ import { Funzione } from 'src/app/entity/user';
 })
 export class HeaderComponent implements OnInit {
   public currentUser!: User;
-  
+
   funzioni!:Funzione[] | null;
-  constructor() { 
+  
+  constructor(private router: Router, private authenticationService: AuthenticationService) { 
     console.log('Sono Nel costruttore del Header');
     
   }
@@ -25,6 +28,11 @@ export class HeaderComponent implements OnInit {
       this.funzioni = this.currentUser.listFunzioni;
       
     }
+  }
+
+  logout() {
+    this.authenticationService.logout();
+    this.router.navigate([''])
   }
 
 }
