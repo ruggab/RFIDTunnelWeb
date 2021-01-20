@@ -3,25 +3,30 @@
 <form [formGroup]="form" (ngSubmit)="submit()">
       
     <div class="form-group">
-        <label for="numMailDaInviare">Mail non inviate</label>
-        <input formControlName="numMailDaInviare"
-            id="numMailDaInviare" 
-            type="text" 
-            class="form-control" >
-        <div *ngIf="f.numMailDaInviare.touched && f.numMailDaInviare.invalid" class="alert alert-danger">
-            <div *ngIf="f.numMailDaInviare.errors && f.numMailDaInviare.errors.required">Mail da inviare is required.</div>
+        <label for="ipAdress">Ip Reader</label>
+        <input formControlName="ipAdress" id="ipAdress"   type="text" class="form-control" >
+        <div *ngIf="f.ipAdress.touched && f.ipAdress.invalid" class="alert alert-danger">
+            <div *ngIf="f.ipAdress.errors && f.ipAdress.errors.required">Ip Adress Obbligatorio.</div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="porta">Ip Reader</label>
+        <input formControlName="porta" id="porta"   type="text" class="form-control" >
+        <div *ngIf="f.porta.touched && f.porta.invalid" class="alert alert-danger">
+            <div *ngIf="f.porta.errors && f.porta.errors.required">Porta Obbligatoria.</div>
         </div>
     </div>
    
     <div class="form-group">
-        <label for="numMailSel">Seleziona Mail da inviare:</label>
-        <select formControlName="numMailSel" class="form-control" (change)="changeNumMailSel($event)">
-            <option disabled>Seleziona Num Mail da inviare</option>
+        <label for="tipoReaderSel">Seleziona Reader</label>
+        <select formControlName="tipoReaderSel" class="form-control" (change)="changeTipoReader($event)">
+            <option disabled>Seleziona Reader da Configurare</option>
             
-            <option *ngFor="let numMail of numMailList">{{numMail}}</option>
+            <option *ngFor="let tipoReader of tipoReaderList" value="{{tipoReader.id}}"  >{{tipoReader.descrizione}}</option>
         </select>
-        <div *ngIf="f.numMailSel.touched && f.numMailSel.invalid" class="alert alert-danger">
-            <div *ngIf="f.numMailSel.errors && f.numMailSel.errors.required">NumMailSel è obbligatorio</div>
+        <div *ngIf="f.tipoReaderSel.touched && f.tipoReaderSel.invalid" class="alert alert-danger">
+            <div *ngIf="f.tipoReaderSel.errors && f.tipoReaderSel.errors.required">Tipo Reader obbligatorio</div>
         </div>
     </div>    
   

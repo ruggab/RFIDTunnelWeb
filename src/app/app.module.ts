@@ -13,6 +13,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AgGridModule } from 'ag-grid-angular';
 import { ConfReaderComponent } from './page/confreader/confreader.component';
 import { LoginComponent } from './page/login/login.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LoginComponent } from './page/login/login.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
+    NgSelectModule,
     AgGridModule.withComponents([])
   ],
   providers: [],

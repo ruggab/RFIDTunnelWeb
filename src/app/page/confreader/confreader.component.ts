@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
-import { AvvocatoService } from "../../services/avvocato.service";
+import { ReaderService } from "../../services/reader.service";
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
+import { TipoReader } from '../../entity/tipoReader';
 
 @Component({
   selector: 'app-confreader',
@@ -10,17 +11,18 @@ import { ModalComponent} from '../common/modal/modal.component'
   styleUrls: ['./confreader.component.css']
 })
 export class ConfReaderComponent implements OnInit {
-  numMailList: any = ['10', '100', '1000']
+  tipoReaderList!: TipoReader[];
 
-  constructor(public modalService: NgbModal) { }
+  constructor(public readerService: ReaderService, public modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.onload();
   }
 
   form = new FormGroup({
-    numMailDaInviare: new FormControl('', [Validators.required]),
-    numMailSel: new FormControl('', [Validators.required])
+    tipoReaderSel: new FormControl('', [Validators.required]),
+    ipAdress: new FormControl('', [Validators.required]),
+    porta: new FormControl('', [Validators.required])
   });
   
 
@@ -28,27 +30,27 @@ export class ConfReaderComponent implements OnInit {
     return this.form.controls;
   }
 
-  changeNumMailSel(event:Event) {
+  changeTipoReader(event:Event) {
     console.log(event.target);
   }
 
   onload() {
-    /*this.avvocatoService.getNumMailDaInviare().subscribe(
+    this.readerService.getTipoReaderList().subscribe(
       data => {
-        this.form.setValue({numMailDaInviare: data, numMailSel:"10"});
-        
+        //this.form.setValue({numMailDaInviare: data, numMailSel:"10"});
+        this.tipoReaderList = data;
         console.log(data);
       },
-      error => console.log(error));*/
+      error => console.log(error));
   }
   
   submit(){
-    console.log(this.form.value);
-    const inviaForm = {
-      numMailDaInviare: this.form.controls.numMailDaInviare.value, 
-      numMailSel: this.form.controls.numMailSel.value
-    };
-    this.inviaMail(inviaForm)
+    // console.log(this.form.value);
+    // const inviaForm = {
+    //   numMailDaInviare: this.form.controls.numMailDaInviare.value, 
+    //   numMailSel: this.form.controls.numMailSel.value
+    // };
+    // this.inviaMail(inviaForm)
   }
 
 

@@ -3,12 +3,6 @@ export class User {
   usr!: string | null;
   psw!: string | null;
   listFunzioni!:Funzione[] | null;
-
-  hasFunzione(codFun:string) {
-    let ret = this.listFunzioni?.find(fun =>fun.codice === codFun);
-    console.log(ret);
-    return ret;
-  }
 }
 
 export class Funzione {
