@@ -22,9 +22,9 @@ export class ConfReaderComponent implements OnInit {
   gridOptions:GridOptions;
   
   columnDefs = [ 
-    { field: 'ipAdress', width: 100 },
-    { field: 'porta', width: 100 },
-    { field: 'tipoReader', sortable: true, filter: true, width: 100 }
+    { field: 'idTipoReader' },
+    { field: 'ipAdress'},
+    { field: 'porta' }
     
 ];
 
@@ -77,17 +77,16 @@ export class ConfReaderComponent implements OnInit {
         console.log(data);
         this.loading = true;
         this.rowData = data;
-      },
-      error => console.log(error));
+      },error => {
+        console.log(error);
+        this.loading = false;
+        this.openErrorDialog();
+    });
+     
   }
 
 
-  inviaMail(inviaForm:Object) {
-    // this.avvocatoService.inviaMail(inviaForm).subscribe(
-    //     data => {this.openDialog()},
-    //     error => {this.openErrorDialog()}
-    // );
-  }
+  
 
   openDialog() {
     const modalRef = this.modalService.open(ModalComponent);
@@ -98,7 +97,7 @@ export class ConfReaderComponent implements OnInit {
   openErrorDialog() {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.title = 'Error';
-    modalRef.componentInstance.msg = 'Errore invio massivo';
+    modalRef.componentInstance.msg = 'Errore durante il salvataggio dei dati';
   }
 
 
