@@ -37,10 +37,6 @@ export class ConfReaderComponent implements OnInit {
           this.gridOptions.api?.paginationGoToNextPage;
       }
    };
-   
-
-
-
   }
 
   ngOnInit(): void {
