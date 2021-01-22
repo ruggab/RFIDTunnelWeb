@@ -4,16 +4,44 @@ import { ReaderService } from "../../services/reader.service";
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
 import { TipoReader } from '../../entity/tipoReader';
+import { GridOptions } from 'ag-grid-community';
 
 @Component({
   selector: 'app-confreader',
   templateUrl: './confreader.component.html',
   styleUrls: ['./confreader.component.css']
 })
-export class ConfReaderComponent implements OnInit {
-  tipoReaderList!: TipoReader[];
 
-  constructor(public readerService: ReaderService, public modalService: NgbModal) { }
+export class ConfReaderComponent implements OnInit {
+  //Select box
+  tipoReaderList: TipoReader[] = [];
+  
+  //GRID
+  loading: boolean = false; 
+  rowData: any;
+  gridOptions:GridOptions;
+  
+  columnDefs = [ 
+    { field: 'ipAdress', width: 100 },
+    { field: 'porta', width: 100 },
+    { field: 'tipoReader', sortable: true, filter: true, width: 100 }
+    
+];
+
+
+  constructor(public readerService: ReaderService, public modalService: NgbModal) { 
+    this.gridOptions = <GridOptions>{
+      onGridReady: () => {
+         // this.gridOptions.api?.setAlwaysShowVerticalScroll;
+          this.gridOptions.api?.paginationGetCurrentPage;
+          this.gridOptions.api?.paginationGoToNextPage;
+      }
+   };
+   
+
+
+
+  }
 
   ngOnInit(): void {
     this.onload();
@@ -35,6 +63,8 @@ export class ConfReaderComponent implements OnInit {
   }
 
   onload() {
+    //Sull onload carico la select box
+    this.loading = false;
     this.readerService.getTipoReaderList().subscribe(
       data => {
         //this.form.setValue({numMailDaInviare: data, numMailSel:"10"});
@@ -45,12 +75,14 @@ export class ConfReaderComponent implements OnInit {
   }
   
   submit(){
-    // console.log(this.form.value);
-    // const inviaForm = {
-    //   numMailDaInviare: this.form.controls.numMailDaInviare.value, 
-    //   numMailSel: this.form.controls.numMailSel.value
-    // };
-    // this.inviaMail(inviaForm)
+    console.log(this.form.value);
+    this.readerService.createReader(this.form.value).subscribe(
+      data => {
+        console.log(data);
+        this.loading = true;
+        this.rowData = data;
+      },
+      error => console.log(error));
   }
 
 
