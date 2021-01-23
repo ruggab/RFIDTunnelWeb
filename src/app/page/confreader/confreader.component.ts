@@ -5,6 +5,7 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
 import { TipoReader } from '../../entity/tipoReader';
 import { GridOptions } from 'ag-grid-community';
+import {  HttpErrorResponse } from "@angular/common/http";
 
 @Component({
   selector: 'app-confreader',
@@ -20,14 +21,21 @@ export class ConfReaderComponent implements OnInit {
   loading: boolean = false; 
   rowData: any;
   gridOptions:GridOptions;
+  submitted = false;
   
   columnDefs = [ 
     { field: 'idTipoReader' },
     { field: 'ipAdress'},
-    { field: 'porta' }
-    
-];
+    { field: 'porta' }];
 
+    numberOnly(event:any): boolean {
+      const charCode = (event.which) ? event.which : event.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        return false;
+      }
+      return true;
+  
+    }
 
   constructor(public readerService: ReaderService, public modalService: NgbModal) { 
     this.gridOptions = <GridOptions>{
@@ -45,8 +53,8 @@ export class ConfReaderComponent implements OnInit {
 
   form = new FormGroup({
     tipoReaderSel: new FormControl('', [Validators.required]),
-    ipAdress: new FormControl('', [Validators.required]),
-    porta: new FormControl('', [Validators.required])
+    ipAdress: new FormControl('', [Validators.required, Validators.maxLength(15)]),
+    porta: new FormControl('', [Validators.required, Validators.maxLength(4)])
   });
   
 
@@ -71,6 +79,10 @@ export class ConfReaderComponent implements OnInit {
   }
   
   submit(){
+    this.submitted = true;
+    if (this.form.invalid) {
+      return;
+    }
     console.log(this.form.value);
     this.readerService.createReader(this.form.value).subscribe(
       data => {
@@ -80,7 +92,7 @@ export class ConfReaderComponent implements OnInit {
       },error => {
         console.log(error);
         this.loading = false;
-        this.openErrorDialog();
+        this.openErrorDialog(error);
     });
      
   }
@@ -94,10 +106,13 @@ export class ConfReaderComponent implements OnInit {
     modalRef.componentInstance.msg = 'Invio Massivo terminato correttamente';
   }
   
-  openErrorDialog() {
+ 
+
+  openErrorDialog(error:HttpErrorResponse) {
     const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.title = 'Error';
-    modalRef.componentInstance.msg = 'Errore durante il salvataggio dei dati';
+    modalRef.componentInstance.title = error.error.error;
+    modalRef.componentInstance.msg = error.error.message;
+    ;
   }
 
 
