@@ -6,6 +6,9 @@ import { ModalComponent} from '../common/modal/modal.component'
 import { TipoReader } from '../../entity/tipoReader';
 import { GridOptions } from 'ag-grid-community';
 import {  HttpErrorResponse } from "@angular/common/http";
+import { ButtonRendererComponent } from './button-renderer.component';
+import { WiramaComponent } from '../../page/modalwirama/wirama.component';
+import { InpinjComponent } from '../../page/modalinpinj/inpinj.component';
 
 @Component({
   selector: 'app-confreader',
@@ -20,13 +23,34 @@ export class ConfReaderComponent implements OnInit {
   //GRID
   loading: boolean = false; 
   rowData: any;
-  gridOptions:GridOptions;
+  //gridOptions!:GridOptions;
   submitted = false;
+
+  frameworkComponents: any;
+  api: any;
+
+  constructor(public readerService: ReaderService, public modalService: NgbModal) { 
+    this.frameworkComponents = {
+      buttonRenderer: ButtonRendererComponent,
+    }
+  }
   
   columnDefs = [ 
-    { field: 'idTipoReader' },
-    { field: 'ipAdress'},
-    { field: 'porta' }];
+    { field: 'idTipoReader',editable: true },
+    { field: 'ipAdress', editable: true},
+    { field: 'porta',editable: true },
+    { headerName: 'Edit', cellRenderer: 'buttonRenderer', cellRendererParams: {
+          onClick: this.onEditButtonClick.bind(this),
+          label: 'Edit'
+          },
+    },
+    { headerName: 'Delete', cellRenderer: 'buttonRenderer', cellRendererParams: {
+          onClick: this.onDeleteButtonClick.bind(this),
+          label: 'Delete'
+          },
+    },
+  ];
+
 
     numberOnly(event:any): boolean {
       const charCode = (event.which) ? event.which : event.keyCode;
@@ -37,15 +61,7 @@ export class ConfReaderComponent implements OnInit {
   
     }
 
-  constructor(public readerService: ReaderService, public modalService: NgbModal) { 
-    this.gridOptions = <GridOptions>{
-      onGridReady: () => {
-         // this.gridOptions.api?.setAlwaysShowVerticalScroll;
-          this.gridOptions.api?.paginationGetCurrentPage;
-          this.gridOptions.api?.paginationGoToNextPage;
-      }
-   };
-  }
+  
 
   ngOnInit(): void {
     this.onload();
@@ -68,18 +84,36 @@ export class ConfReaderComponent implements OnInit {
 
   onload() {
     //Sull onload carico la select box
-    this.loading = false;
+    //this.loading = false;
     this.readerService.getTipoReaderList().subscribe(
       data => {
         //this.form.setValue({numMailDaInviare: data, numMailSel:"10"});
         this.tipoReaderList = data;
         console.log(data);
       },
-      error => console.log(error));
+      error => {
+        console.log(error);
+        this.openErrorDialog(error);
+      }
+    );
+
+    this.readerService.getReaderList().subscribe(
+      data => {
+        console.log(data);
+        //this.loading = true;
+        this.rowData = data;
+      },error => {
+        console.log(error);
+        //this.loading = false;
+        this.openErrorDialog(error);
+    });
+
+
   }
   
   submit(){
     this.submitted = true;
+    //this.loading = true;
     if (this.form.invalid) {
       return;
     }
@@ -87,18 +121,16 @@ export class ConfReaderComponent implements OnInit {
     this.readerService.createReader(this.form.value).subscribe(
       data => {
         console.log(data);
-        this.loading = true;
+        //this.loading = true;
         this.rowData = data;
       },error => {
         console.log(error);
-        this.loading = false;
+        //this.loading = false;
         this.openErrorDialog(error);
     });
      
   }
 
-
-  
 
   openDialog() {
     const modalRef = this.modalService.open(ModalComponent);
@@ -106,7 +138,6 @@ export class ConfReaderComponent implements OnInit {
     modalRef.componentInstance.msg = 'Invio Massivo terminato correttamente';
   }
   
- 
 
   openErrorDialog(error:HttpErrorResponse) {
     const modalRef = this.modalService.open(ModalComponent);
@@ -114,6 +145,54 @@ export class ConfReaderComponent implements OnInit {
     modalRef.componentInstance.msg = error.error.message;
     ;
   }
+
+  onEditButtonClick(params:any)
+  {
+    this.openEditReaderDialog(params);
+    // this.api.startEditingCell({
+    //     rowIndex: params.rowIndex,
+    //     colKey: 'make'
+    //   });
+  }
+  
+  openEditReaderDialog(params:any) {
+    let idedit = params.data.id;
+    let idreader = params.data.idTipoReader;
+    if (idreader===1){
+      const modalRef = this.modalService.open(InpinjComponent);
+      modalRef.componentInstance.title = 'Reader Inpinj';
+      modalRef.componentInstance.ipAdress = params.data.ipAdress;
+    }
+    if (idreader===2){
+      const modalRef = this.modalService.open(WiramaComponent);
+    }
+    
+    
+    
+  }
+  
+  onDeleteButtonClick(params:any)
+  {
+    let idremoved = params.data.id;
+    this.readerService.deleteReader(idremoved).subscribe(
+      data => {
+        console.log(data);
+       // this.rowData = data;
+        
+      },error => {
+        console.log(error);
+        this.openErrorDialog(error);
+    });
+   // this.api.updateRowData();
+    //this.api.updateRowData({remove: [params.data]});
+    this.api.applyTransaction({remove: [params.node.data]});
+  }
+
+  onGridReady(params:any)
+  {
+    this.api = params.api;
+  }
+
 
 
 }

@@ -19,7 +19,6 @@ export class ReaderService {
 
   createReader(readerForm:Object): Observable<Object> {
     let baseUrl = 'http://localhost:8080/api/v1/creaReader';
-    console.log("---->" + readerForm);
     return this.http.post(`${baseUrl}`, readerForm);
   }
 
@@ -30,12 +29,12 @@ export class ReaderService {
   }
 
   deleteReader(id: number): Observable<any> {
-    let baseUrl = 'http://localhost:8080/api/v1/tipoReader';
+    let baseUrl = 'http://localhost:8080/api/v1/deleteReader';
     return this.http.delete(`${baseUrl}/${id}`, { responseType: 'text' });
   }
 
   getReaderList(): Observable<any> {
-    let baseUrl = 'http://localhost:8080/api/v1/tipoReader';
+    let baseUrl = 'http://localhost:8080/api/v1/allreader';
     return this.http.get(`${baseUrl}`);
   }
 

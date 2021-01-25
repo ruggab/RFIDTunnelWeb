@@ -14,6 +14,9 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ConfReaderComponent } from './page/confreader/confreader.component';
 import { LoginComponent } from './page/login/login.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ButtonRendererComponent } from './page/confreader/button-renderer.component';
+import { WiramaComponent } from './page/modalwirama/wirama.component';
+import { InpinjComponent } from './page/modalinpinj/inpinj.component';
 
 @NgModule({
   declarations: [
@@ -22,8 +25,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
     HeaderComponent,
     FooterComponent,
     ModalComponent,
+    WiramaComponent,
+    InpinjComponent,
     ConfReaderComponent,
-    LoginComponent
+    LoginComponent,ButtonRendererComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +39,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([ButtonRendererComponent])
   ],
   providers: [],
   bootstrap: [AppComponent],
