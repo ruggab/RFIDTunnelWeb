@@ -23,9 +23,9 @@ export class ReaderService {
   }
 
 
-  updateReader(id: number, value: any): Observable<Object> {
-    let baseUrl = 'http://localhost:8080/api/v1/tipoReader';
-    return this.http.put(`${baseUrl}/${id}`, value);
+  updateReader(readerForm:Object): Observable<Object> {
+    let baseUrl = 'http://localhost:8080/api/v1/updateReader';
+    return this.http.put(`${baseUrl}`, readerForm);
   }
 
   deleteReader(id: number): Observable<any> {

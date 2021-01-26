@@ -4,19 +4,41 @@
 <div class="modal-body">
   <form [formGroup]="editForm" (ngSubmit)="submit()"  >
           
-    <div class="form-group" >
-      <label for="ipAdress">Ip Reader</label>
-      <input formControlName="ipAdress" id="ipAdress"   type="text" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.ipAdress.errors }" maxlength="15"> 
-      <div *ngIf="submitted && f.ipAdress.errors" class="invalid-feedback">
-          <div *ngIf="f.ipAdress.errors.required">Ip Adress Obbligatorio.</div>
+      <div class="form-group" >
+        <label for="ipAdress">Indirizzo IP</label>
+        <input formControlName="ipAdress" id="ipAdress"   type="text" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.ipAdress.errors }" maxlength="15" readonly> 
       </div>
-  </div>
 
+      <div class="form-group">
+        <label for="porta">Porta</label>
+        <input formControlName="porta" id="porta"   type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.porta.errors }" maxlength="4" readonly >
+      </div>
+
+      <div class="form-group">
+        <label for="separatore">Separatore</label>
+        <input formControlName="separatore" id="separatore"   type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.separatore.errors }" maxlength="1"  >
+        <div *ngIf="submitted && f.separatore.errors" class="invalid-feedback">
+            <div *ngIf="f.separatore.errors.required">Separatore Obbligatoria.</div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="antenna3">Antenna 3</label>
+        <input formControlName="antenna3" id="antenna3" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.antenna3.errors }" maxlength="20"  >
+      </div>
+      <div class="form-group">
+        <label for="antenna4">Antenna 4</label>
+        <input formControlName="antenna4" id="antenna4" type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.antenna4.errors }" maxlength="20"  >
+      </div>
+      <div class="form-group">
+        <label for="antenna5">Antenna 5</label>
+        <input formControlName="antenna5" id="antenna5"   type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.antenna5.errors }" maxlength="20"  >
+      </div>
+      
+      <div class="modal-footer">
+        <button  class="btn btn-primary">  Modifica </button>
+        <button type="button" class="btn btn-success" (click)="activeModal.close('Close click')">Close</button>
+      </div>  
       
   </form>
-</div>
-<div class="modal-footer">
- 
-  <button type="button" class="btn btn-success" (click)="activeModal.close('Close click')">Close</button>
-
 </div>

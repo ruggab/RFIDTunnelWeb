@@ -4,11 +4,11 @@ import { ReaderService } from "../../services/reader.service";
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
 import { TipoReader } from '../../entity/tipoReader';
-import { GridOptions } from 'ag-grid-community';
 import {  HttpErrorResponse } from "@angular/common/http";
 import { ButtonRendererComponent } from './button-renderer.component';
 import { WiramaComponent } from '../../page/modalwirama/wirama.component';
 import { InpinjComponent } from '../../page/modalinpinj/inpinj.component';
+import { Reader } from 'src/app/entity/reader';
 
 @Component({
   selector: 'app-confreader',
@@ -23,7 +23,6 @@ export class ConfReaderComponent implements OnInit {
   //GRID
   loading: boolean = false; 
   rowData: any;
-  //gridOptions!:GridOptions;
   submitted = false;
 
   frameworkComponents: any;
@@ -39,6 +38,7 @@ export class ConfReaderComponent implements OnInit {
     { field: 'idTipoReader',editable: true },
     { field: 'ipAdress', editable: true},
     { field: 'porta',editable: true },
+    { field: 'separatore',editable: true },
     { headerName: 'Edit', cellRenderer: 'buttonRenderer', cellRendererParams: {
           onClick: this.onEditButtonClick.bind(this),
           label: 'Edit'
@@ -70,7 +70,8 @@ export class ConfReaderComponent implements OnInit {
   form = new FormGroup({
     tipoReaderSel: new FormControl('', [Validators.required]),
     ipAdress: new FormControl('', [Validators.required, Validators.maxLength(15)]),
-    porta: new FormControl('', [Validators.required, Validators.maxLength(4)])
+    porta: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+    separatore: new FormControl('', [Validators.required, Validators.maxLength(1)])
   });
   
 
@@ -82,9 +83,20 @@ export class ConfReaderComponent implements OnInit {
     console.log(event.target);
   }
 
-  onload() {
-    //Sull onload carico la select box
-    //this.loading = false;
+  private setReadersList(){
+    this.readerService.getReaderList().subscribe(
+      data => {
+        console.log(data);
+        //this.loading = true;
+        this.rowData = data;
+      },error => {
+        console.log(error);
+        //this.loading = false;
+        this.openErrorDialog(error);
+    });
+  }
+
+  private setTipoReaders(){
     this.readerService.getTipoReaderList().subscribe(
       data => {
         //this.form.setValue({numMailDaInviare: data, numMailSel:"10"});
@@ -96,19 +108,11 @@ export class ConfReaderComponent implements OnInit {
         this.openErrorDialog(error);
       }
     );
+  }
 
-    this.readerService.getReaderList().subscribe(
-      data => {
-        console.log(data);
-        //this.loading = true;
-        this.rowData = data;
-      },error => {
-        console.log(error);
-        //this.loading = false;
-        this.openErrorDialog(error);
-    });
-
-
+  onload() {
+    this.setTipoReaders();
+    this.setReadersList();
   }
   
   submit(){
@@ -148,26 +152,33 @@ export class ConfReaderComponent implements OnInit {
 
   onEditButtonClick(params:any)
   {
-    this.openEditReaderDialog(params);
-    // this.api.startEditingCell({
-    //     rowIndex: params.rowIndex,
-    //     colKey: 'make'
-    //   });
+    this.openEditReaderDialog(params.node.data);
+    console.log(params.node.data) ; 
+   
   }
   
-  openEditReaderDialog(params:any) {
-    let idedit = params.data.id;
-    let idreader = params.data.idTipoReader;
-    if (idreader===1){
-      const modalRef = this.modalService.open(InpinjComponent);
+  openEditReaderDialog(reader: Reader) {
+    let modalRef = null;
+    if (reader.idTipoReader===1){
+      modalRef = this.modalService.open(InpinjComponent, { centered: true });
       modalRef.componentInstance.title = 'Reader Inpinj';
-      modalRef.componentInstance.ipAdress = params.data.ipAdress;
+      modalRef.componentInstance.selectedReader = reader;
+     
     }
-    if (idreader===2){
+    if (reader.idTipoReader===2){
       const modalRef = this.modalService.open(WiramaComponent);
+      modalRef.componentInstance.title = 'Reader Wirama';
+      modalRef.componentInstance.selectedReader = reader;
     }
+
     
-    
+
+    modalRef?.result.then((yes) => {
+      console.log("Yes Click");
+      this.setReadersList();
+    },(cancel) => {
+        console.log("Cancel Click");
+      })
     
   }
   

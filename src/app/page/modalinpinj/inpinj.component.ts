@@ -17,42 +17,48 @@ export class InpinjComponent implements OnInit {
   selectedReader: Reader = new Reader();
   editForm!: FormGroup;
   isLoading = false;
-  constructor(public modal: NgbActiveModal, private route: ActivatedRoute, 
-              private usersService: ReaderService, private formBuilder: FormBuilder, 
+  submitted = false;
+  @Input() title: any;
+  constructor(public activeModal: NgbActiveModal,  
+              private readerService: ReaderService, private formBuilder: FormBuilder, 
               private router: Router) { }
  
-  ngOnInit() {
+  ngOnInit() { 
  
     this.setForm()
   }
  
-  onSubmit() {
+  submit() {
     if (this.editForm.invalid || this.isLoading) {
       return;
     }
     this.isLoading = true;
-    // this.usersService.updateUser(this.editForm.value).subscribe(x => {
-    //   this.isLoading = false;
-    //   this.modal.close('Yes');
-    // },
-    //   error => {
-    //     this.isLoading = false;
-    //   });
+    this.readerService.updateReader(this.editForm.value).subscribe(x => {
+      this.isLoading = false;
+      this.activeModal.close('Yes');
+    },
+      error => {
+        console.log(error);
+        this.isLoading = false;
+      });
   }
  
   get f() { 
+    
     return this.editForm.controls; 
   }
  
   private setForm() {
-    console.log(this.selectedReader);
+    console.log(this.selectedReader.id);
      
     this.editForm = this.formBuilder.group({
       id: [this.selectedReader.id],
-      ipAdress: [this.selectedReader.ipAdress, Validators.required],
-      porta: [this.selectedReader.porta, Validators.required],
-      separatore: [{ value: this.selectedReader.separatore, disabled: true }, [Validators.email, Validators.required]],
-      
+      ipAdress: [this.selectedReader.ipAdress],
+      porta: [this.selectedReader.porta],
+      separatore: [this.selectedReader.separatore],
+      antenna3: [this.selectedReader.antenna3],
+      antenna4: [this.selectedReader.antenna4],
+      antenna5: [this.selectedReader.antenna5]
     });
   }
 }
