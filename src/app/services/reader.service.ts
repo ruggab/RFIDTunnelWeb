@@ -45,7 +45,10 @@ export class ReaderService {
   }
   
 
-  
+  startReader(readerForm:Object): Observable<Object> {
+    let baseUrl = 'http://localhost:8080/api/v1/startReader';
+    return this.http.post(`${baseUrl}`, readerForm);
+  }
 
   
 

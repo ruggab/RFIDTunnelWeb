@@ -35,20 +35,25 @@ export class ConfReaderComponent implements OnInit {
   }
   
   columnDefs = [ 
-    { field: 'idTipoReader',editable: true },
-    { field: 'ipAdress', editable: true},
-    { field: 'porta',editable: true },
-    { field: 'separatore',editable: true },
-    { headerName: 'Edit', cellRenderer: 'buttonRenderer', cellRendererParams: {
+    { field: 'idTipoReader' },
+    { field: 'ipAdress'},
+    { field: 'porta' },
+    { field: 'separatore' },
+    { headerName: 'Edit',  width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
           onClick: this.onEditButtonClick.bind(this),
           label: 'Edit'
           },
     },
-    { headerName: 'Delete', cellRenderer: 'buttonRenderer', cellRendererParams: {
+    { headerName: 'Delete',width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
           onClick: this.onDeleteButtonClick.bind(this),
           label: 'Delete'
           },
     },
+    { headerName: 'Start',width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
+      onClick: this.onStartButtonClick.bind(this),
+      label: 'Start'
+      },
+    }
   ];
 
 
@@ -156,6 +161,12 @@ export class ConfReaderComponent implements OnInit {
     console.log(params.node.data) ; 
    
   }
+
+  onStartButtonClick(params:any)
+  {
+    console.log(params.node.data) ; 
+   
+  }
   
   openEditReaderDialog(reader: Reader) {
     let modalRef = null;
@@ -166,7 +177,7 @@ export class ConfReaderComponent implements OnInit {
      
     }
     if (reader.idTipoReader===2){
-      const modalRef = this.modalService.open(WiramaComponent);
+      modalRef = this.modalService.open(WiramaComponent, { centered: true });
       modalRef.componentInstance.title = 'Reader Wirama';
       modalRef.componentInstance.selectedReader = reader;
     }

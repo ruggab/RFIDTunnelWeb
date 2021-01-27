@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Reader } from 'src/app/entity/reader';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ReaderService } from "../../services/reader.service";
 @Component({
   selector: 'app-wirama',
@@ -13,19 +12,30 @@ export class WiramaComponent implements OnInit {
 
   selectedReader: Reader = new Reader();
   editForm!: FormGroup;
+  isLoading = false;
   submitted = false;
   @Input() title: any;
-  constructor(public activeModal: NgbActiveModal, private route: ActivatedRoute, 
-              private usersService: ReaderService, private formBuilder: FormBuilder, 
-              private router: Router) { }
+  constructor(public activeModal: NgbActiveModal,  
+              private readerService: ReaderService, private formBuilder: FormBuilder, 
+              ) { }
  
   ngOnInit() { 
- 
     this.setForm()
   }
  
   submit() {
-    
+    if (this.editForm.invalid || this.isLoading) {
+      return;
+    }
+    this.isLoading = true;
+    this.readerService.updateReader(this.editForm.value).subscribe(x => {
+      this.isLoading = false;
+      this.activeModal.close('yes');
+    },
+      error => {
+        console.log(error);
+        this.isLoading = false;
+      });
   }
  
   get f() { 
@@ -37,11 +47,12 @@ export class WiramaComponent implements OnInit {
      
     this.editForm = this.formBuilder.group({
       id: [this.selectedReader.id],
+      tipoReaderSel: [this.selectedReader.idTipoReader],
       ipAdress: [this.selectedReader.ipAdress],
       porta: [this.selectedReader.porta],
       separatore: [this.selectedReader.separatore],
-      antenna1: [this.selectedReader.antenna3],
-      antenna2: [this.selectedReader.antenna4]
+      antenna1: [this.selectedReader.antenna1],
+      antenna2: [this.selectedReader.antenna2]
     });
   }
 

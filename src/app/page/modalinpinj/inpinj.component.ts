@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, FormBuilder, } from '@angular/forms';
 import { Reader } from 'src/app/entity/reader';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ReaderService } from "../../services/reader.service";
 
 @Component({
@@ -21,13 +20,13 @@ export class InpinjComponent implements OnInit {
   @Input() title: any;
   constructor(public activeModal: NgbActiveModal,  
               private readerService: ReaderService, private formBuilder: FormBuilder, 
-              private router: Router) { }
+              ) { }
  
-  ngOnInit() { 
- 
+  ngOnInit() {  
     this.setForm()
   }
  
+
   submit() {
     if (this.editForm.invalid || this.isLoading) {
       return;
@@ -53,6 +52,7 @@ export class InpinjComponent implements OnInit {
      
     this.editForm = this.formBuilder.group({
       id: [this.selectedReader.id],
+      tipoReaderSel: [this.selectedReader.idTipoReader],
       ipAdress: [this.selectedReader.ipAdress],
       porta: [this.selectedReader.porta],
       separatore: [this.selectedReader.separatore],
