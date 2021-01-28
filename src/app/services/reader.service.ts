@@ -50,7 +50,10 @@ export class ReaderService {
     return this.http.post(`${baseUrl}`, readerForm);
   }
 
-  
+  stopReader(readerForm:Object): Observable<Object> {
+    let baseUrl = 'http://localhost:8080/api/v1/stopReader';
+    return this.http.post(`${baseUrl}`, readerForm);
+  }
 
   
 }

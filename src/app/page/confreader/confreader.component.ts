@@ -35,10 +35,10 @@ export class ConfReaderComponent implements OnInit {
   }
   
   columnDefs = [ 
-    { field: 'idTipoReader' },
-    { field: 'ipAdress'},
-    { field: 'porta' },
-    { field: 'separatore' },
+    { field: 'idTipoReader',width: 160 },
+    { field: 'ipAdress',width: 160},
+    { field: 'porta',width: 160 },
+    { field: 'separatore',width: 160 },
     { headerName: 'Edit',  width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
           onClick: this.onEditButtonClick.bind(this),
           label: 'Edit'
@@ -52,6 +52,11 @@ export class ConfReaderComponent implements OnInit {
     { headerName: 'Start',width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
       onClick: this.onStartButtonClick.bind(this),
       label: 'Start'
+      },
+    },
+    { headerName: 'Stop',width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
+      onClick: this.onStopButtonClick.bind(this),
+      label: 'Stop'
       },
     }
   ];
@@ -141,11 +146,7 @@ export class ConfReaderComponent implements OnInit {
   }
 
 
-  openDialog() {
-    const modalRef = this.modalService.open(ModalComponent);
-    modalRef.componentInstance.title = 'Succes';
-    modalRef.componentInstance.msg = 'Invio Massivo terminato correttamente';
-  }
+  
   
 
   openErrorDialog(error:HttpErrorResponse) {
@@ -165,7 +166,35 @@ export class ConfReaderComponent implements OnInit {
   onStartButtonClick(params:any)
   {
     console.log(params.node.data) ; 
-   
+    this.readerService.startReader(params.node.data).subscribe(
+      data => {
+        console.log(data);
+        this.openDialog(data) 
+        
+      },error => {
+        console.log(error);
+        this.openErrorDialog(error);
+    });
+  }
+
+  onStopButtonClick(params:any)
+  {
+    console.log(params.node.data) ; 
+    this.readerService.stopReader(params.node.data).subscribe(
+      data => {
+        console.log(data);
+        this.openDialog(data) 
+        
+      },error => {
+        console.log(error);
+        this.openErrorDialog(error);
+    });
+  }
+
+  openDialog(respose:any) {
+    const modalRef = this.modalService.open(ModalComponent);
+    modalRef.componentInstance.title = respose.stato;
+    modalRef.componentInstance.msg = respose.msg;
   }
   
   openEditReaderDialog(reader: Reader) {
