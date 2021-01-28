@@ -2,7 +2,7 @@
 
 export class Reader {
   
-  id!: number | null;
+  id!: number;
   idTipoReader!: number | null;
   ipAdress!: string | null;
   porta!: string | null;

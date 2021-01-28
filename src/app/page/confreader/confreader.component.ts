@@ -5,7 +5,6 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
 import { TipoReader } from '../../entity/tipoReader';
 import {  HttpErrorResponse } from "@angular/common/http";
-import { ButtonRendererComponent } from './button-renderer.component';
 import { WiramaComponent } from '../../page/modalwirama/wirama.component';
 import { InpinjComponent } from '../../page/modalinpinj/inpinj.component';
 import { Reader } from 'src/app/entity/reader';
@@ -18,48 +17,22 @@ import { Reader } from 'src/app/entity/reader';
 
 export class ConfReaderComponent implements OnInit {
   //Select box
-  tipoReaderList: TipoReader[] = [];
+  tipoReaderList:  Array<TipoReader> = [];
+  readerList : Array<Reader> = [];
   
   //GRID
   loading: boolean = false; 
-  rowData: any;
+  //rowData: any;
   submitted = false;
 
-  frameworkComponents: any;
-  api: any;
+  //frameworkComponents: any;
+  //api: any;
 
   constructor(public readerService: ReaderService, public modalService: NgbModal) { 
-    this.frameworkComponents = {
-      buttonRenderer: ButtonRendererComponent,
-    }
+   
   }
   
-  columnDefs = [ 
-    { field: 'idTipoReader',width: 160 },
-    { field: 'ipAdress',width: 160},
-    { field: 'porta',width: 160 },
-    { field: 'separatore',width: 160 },
-    { headerName: 'Edit',  width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
-          onClick: this.onEditButtonClick.bind(this),
-          label: 'Edit'
-          },
-    },
-    { headerName: 'Delete',width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
-          onClick: this.onDeleteButtonClick.bind(this),
-          label: 'Delete'
-          },
-    },
-    { headerName: 'Start',width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
-      onClick: this.onStartButtonClick.bind(this),
-      label: 'Start'
-      },
-    },
-    { headerName: 'Stop',width: 120, cellRenderer: 'buttonRenderer', cellRendererParams: {
-      onClick: this.onStopButtonClick.bind(this),
-      label: 'Stop'
-      },
-    }
-  ];
+  
 
 
     numberOnly(event:any): boolean {
@@ -97,11 +70,11 @@ export class ConfReaderComponent implements OnInit {
     this.readerService.getReaderList().subscribe(
       data => {
         console.log(data);
-        //this.loading = true;
-        this.rowData = data;
+       
+        this.readerList = data;
       },error => {
         console.log(error);
-        //this.loading = false;
+        
         this.openErrorDialog(error);
     });
   }
@@ -109,7 +82,6 @@ export class ConfReaderComponent implements OnInit {
   private setTipoReaders(){
     this.readerService.getTipoReaderList().subscribe(
       data => {
-        //this.form.setValue({numMailDaInviare: data, numMailSel:"10"});
         this.tipoReaderList = data;
         console.log(data);
       },
@@ -136,7 +108,8 @@ export class ConfReaderComponent implements OnInit {
       data => {
         console.log(data);
         //this.loading = true;
-        this.rowData = data;
+        this.setReadersList(); 
+        //this.rowData = data;
       },error => {
         console.log(error);
         //this.loading = false;
@@ -145,10 +118,6 @@ export class ConfReaderComponent implements OnInit {
      
   }
 
-
-  
-  
-
   openErrorDialog(error:HttpErrorResponse) {
     const modalRef = this.modalService.open(ModalComponent);
     modalRef.componentInstance.title = error.error.error;
@@ -156,12 +125,7 @@ export class ConfReaderComponent implements OnInit {
     ;
   }
 
-  onEditButtonClick(params:any)
-  {
-    this.openEditReaderDialog(params.node.data);
-    console.log(params.node.data) ; 
-   
-  }
+ 
 
   onStartButtonClick(params:any)
   {
@@ -196,7 +160,15 @@ export class ConfReaderComponent implements OnInit {
     modalRef.componentInstance.title = respose.stato;
     modalRef.componentInstance.msg = respose.msg;
   }
+   
+
   
+  editItem(reader:Reader)
+  {
+    this.openEditReaderDialog(reader);
+    console.log(reader) ; 
+   
+  }
   openEditReaderDialog(reader: Reader) {
     let modalRef = null;
     if (reader.idTipoReader===1){
@@ -211,8 +183,6 @@ export class ConfReaderComponent implements OnInit {
       modalRef.componentInstance.selectedReader = reader;
     }
 
-    
-
     modalRef?.result.then((yes) => {
       console.log("Yes Click");
       this.setReadersList();
@@ -222,27 +192,24 @@ export class ConfReaderComponent implements OnInit {
     
   }
   
-  onDeleteButtonClick(params:any)
+  
+  deleteItem(reader:Reader)
   {
-    let idremoved = params.data.id;
-    this.readerService.deleteReader(idremoved).subscribe(
+    //let idremoved = params.data.id;
+    this.readerService.deleteReader(reader.id).subscribe(
       data => {
         console.log(data);
-       // this.rowData = data;
+        this.setReadersList(); 
         
       },error => {
         console.log(error);
         this.openErrorDialog(error);
     });
-   // this.api.updateRowData();
-    //this.api.updateRowData({remove: [params.data]});
-    this.api.applyTransaction({remove: [params.node.data]});
+   
+    
   }
 
-  onGridReady(params:any)
-  {
-    this.api = params.api;
-  }
+  
 
 
 
