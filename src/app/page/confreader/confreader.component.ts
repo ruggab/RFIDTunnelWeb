@@ -127,33 +127,7 @@ export class ConfReaderComponent implements OnInit {
 
  
 
-  onStartButtonClick(params:any)
-  {
-    console.log(params.node.data) ; 
-    this.readerService.startReader(params.node.data).subscribe(
-      data => {
-        console.log(data);
-        this.openDialog(data) 
-        
-      },error => {
-        console.log(error);
-        this.openErrorDialog(error);
-    });
-  }
-
-  onStopButtonClick(params:any)
-  {
-    console.log(params.node.data) ; 
-    this.readerService.stopReader(params.node.data).subscribe(
-      data => {
-        console.log(data);
-        this.openDialog(data) 
-        
-      },error => {
-        console.log(error);
-        this.openErrorDialog(error);
-    });
-  }
+  
 
   openDialog(respose:any) {
     const modalRef = this.modalService.open(ModalComponent);
@@ -205,11 +179,35 @@ export class ConfReaderComponent implements OnInit {
         console.log(error);
         this.openErrorDialog(error);
     });
-   
-    
   }
 
-  
+  startReader(reader:Reader)
+  {
+    
+    this.readerService.startReader(reader).subscribe(
+      data => {
+        console.log(data);
+        this.openDialog(data) 
+        
+      },error => {
+        console.log(error);
+        this.openErrorDialog(error);
+    });
+  }
+
+  stopReader(reader:Reader)
+  {
+     
+    this.readerService.stopReader(reader).subscribe(
+      data => {
+        console.log(data);
+        this.openDialog(data) 
+        
+      },error => {
+        console.log(error);
+        this.openErrorDialog(error);
+    });
+  }
 
 
 
