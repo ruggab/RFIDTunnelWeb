@@ -1,0 +1,43 @@
+
+    
+    <div class="form-group"  style="margin-top: 70px;" >
+        <button  class="btn btn-primary"  (click)="addNewReader()" >
+            AGGIUNGI
+        </button>
+    </div>  
+
+
+<table class="table" *ngIf="readerList">
+    <thead class="thead-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Tipo Reader</th>
+        <th scope="col">Indirizzo Ip</th>
+        <th scope="col">Porta</th>
+        <th scope="col">Separatore</th>
+      
+        <th scope="col">Azioni</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reader of readerList, let i = index">
+        <th scope="row">{{i}}</th>
+        <td>{{reader.idTipoReader}}</td>
+        <td>{{reader.ipAdress}}</td>
+        <td>{{reader.porta}}</td>
+     
+        <td>{{reader.separatore}}</td>
+        <td>
+           
+            <button class="btn btn-success m-2" (click)="editItem(reader)">Modifica</button>
+            <button class="btn btn-danger m-2" (click)="deleteItem(reader)">Cancella</button>
+            <!--button class="btn btn-success m-2" (click)="editAntenne(reader)">Antenne</button>
+            <!button class="btn btn-danger m-2" (click)="stopReader(reader)">Stop</button-->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+<!-- [gridOptions]="gridOptions"   -->

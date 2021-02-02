@@ -64,6 +64,7 @@ export class LoginComponent implements OnInit {
                     this.router.navigate(['home']).then(() => {
                             window.location.reload();
                         });
+                    
                 },
                 error => {
                     console.log(error);

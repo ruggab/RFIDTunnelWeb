@@ -50,9 +50,8 @@ export class WiramaComponent implements OnInit {
       tipoReaderSel: [this.selectedReader.idTipoReader],
       ipAdress: [this.selectedReader.ipAdress],
       porta: [this.selectedReader.porta],
-      separatore: [this.selectedReader.separatore],
-      antenna1: [this.selectedReader.antenna1],
-      antenna2: [this.selectedReader.antenna2]
+      numAntenne: [this.selectedReader.numAntenne],
+      separatore: [this.selectedReader.separatore]
     });
   }
 

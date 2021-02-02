@@ -7,9 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'AnagraficaWeb';
+  title = 'RFIDTunnelWeb';
 
-  
+  constructor() { 
+    console.log("RFIDTunnelWeb")
+  }
+
+  ngOnInit(): void {
+
+    
+  }
 
 
 

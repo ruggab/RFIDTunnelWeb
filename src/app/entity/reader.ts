@@ -7,13 +7,14 @@ export class Reader {
   ipAdress!: string | null;
   porta!: string | null;
   separatore!: string | null;
-  //Wirama
-  antenna1!: string | null;
-  antenna2!: string | null;
-  //Inpinj
-  antenna3!: string | null;
-  antenna4!: string | null;
-  antenna5!: string | null;
+  numAntenne!: string | null;
+  
+  activatePort!: string | null;
+  onlinePort!: string | null;
+  greenPort!: string | null;
+  redPort!: string | null;
+  yellowPort!: string | null;
+
 
   
   

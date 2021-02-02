@@ -15,6 +15,11 @@ import { LoginComponent } from './page/login/login.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { WiramaComponent } from './page/modalwirama/wirama.component';
 import { InpinjComponent } from './page/modalinpinj/inpinj.component';
+import { ControlPanelComponent } from './page/controlpanel/controlpanel.component';
+import { ManageReaderComponent } from './page/managereader/managereader.component';
+import { ReaderWiramaComponent } from './page/readerwirama/readerwirama.component';
+import { ReaderInpinjComponent } from './page/readerinpinj/readerinpinj.component';
+import { ReaderComponent } from './page/reader/reader.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,12 @@ import { InpinjComponent } from './page/modalinpinj/inpinj.component';
     WiramaComponent,
     InpinjComponent,
     ConfReaderComponent,
+    ManageReaderComponent,
     LoginComponent,
+    ReaderWiramaComponent,
+    ReaderInpinjComponent,
+    ReaderComponent,
+    ControlPanelComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +53,9 @@ import { InpinjComponent } from './page/modalinpinj/inpinj.component';
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  
+  
+}
 
 

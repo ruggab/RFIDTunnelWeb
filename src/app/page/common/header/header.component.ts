@@ -11,30 +11,35 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   public currentUser!: User;
+ 
 
   funzioni!:Funzione[] | null;
   
   constructor(private router: Router, private authenticationService: AuthenticationService) { 
     console.log('Sono Nel costruttore del Header');
-    
-  }
-
-  ngOnInit(): void {
     console.log('Sono Nel ngOnInit del Header');
     var retrievedObject = sessionStorage.getItem('currentUser');
     if (retrievedObject!= null) {
       console.log('retrievedObject: ', JSON.parse(retrievedObject));
       this.currentUser = JSON.parse(retrievedObject)
       this.funzioni = this.currentUser.listFunzioni;
-      
+    } else  {
+      this.router.navigate(['']);
     }
+    
+  
+  }
+
+  ngOnInit(): void {
+    
   }
 
   logout() {
     this.authenticationService.logout();
-    this.router.navigate(['']).then(() => {
-      window.location.reload();
-    });
+     this.router.navigate(['']);
+    //.then(() => {
+    //   window.location.reload();
+    // });
   }
 
 }

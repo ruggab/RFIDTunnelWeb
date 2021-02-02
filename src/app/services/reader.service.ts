@@ -12,8 +12,13 @@ export class ReaderService {
 
   constructor(private http: HttpClient) { }
 
-  getReader(id: number): Observable<any> {
+  getTipoReader(id: number): Observable<any> {
     let baseUrl = 'http://localhost:8080/api/v1/tipoReader';
+    return this.http.get(`${baseUrl}/${id}`);
+  }
+
+  getReaderById(id: number): Observable<any> {
+    let baseUrl = 'http://localhost:8080/api/v1/reader';
     return this.http.get(`${baseUrl}/${id}`);
   }
 
