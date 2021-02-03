@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReaderService } from "../../services/reader.service";
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
-import {  HttpErrorResponse } from "@angular/common/http";
-import { WiramaComponent } from '../modalwirama/wirama.component';
-import { InpinjComponent } from '../modalinpinj/inpinj.component';
+import { HttpErrorResponse } from "@angular/common/http";
 import { Reader } from 'src/app/entity/reader';
 import { Router } from '@angular/router';
 

@@ -17,8 +17,9 @@ import { WiramaComponent } from './page/modalwirama/wirama.component';
 import { InpinjComponent } from './page/modalinpinj/inpinj.component';
 import { ControlPanelComponent } from './page/controlpanel/controlpanel.component';
 import { ManageReaderComponent } from './page/managereader/managereader.component';
-import { ReaderWiramaComponent } from './page/readerwirama/readerwirama.component';
-import { ReaderInpinjComponent } from './page/readerinpinj/readerinpinj.component';
+import { ReaderWiramaComponent } from './page/readergeneric/readerwirama.component';
+import { ReaderInpinjComponent } from './page/readergeneric/readerinpinj.component';
+import { ReaderGenericComponent } from './page/readergeneric/readergeneric.component';
 import { ReaderComponent } from './page/reader/reader.component';
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ReaderComponent } from './page/reader/reader.component';
     ConfReaderComponent,
     ManageReaderComponent,
     LoginComponent,
+    ReaderGenericComponent,
     ReaderWiramaComponent,
     ReaderInpinjComponent,
     ReaderComponent,

@@ -1,36 +1,24 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Reader } from 'src/app/entity/reader';
-import { ReaderService } from "../../services/reader.service";
-import { ActivatedRoute} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { ReaderGenericComponent } from './readergeneric.component';
 
 @Component({
   selector: 'app-readerinpinj',
   templateUrl: './readerinpinj.component.html',
-  styleUrls: ['./readerinpinj.component.css']
+  styleUrls:  ['./readergeneric.component.css']
 })
 
 
-export class ReaderInpinjComponent implements OnInit {
+export class ReaderInpinjComponent extends ReaderGenericComponent implements OnInit {
 
-  selectedReader: Reader = new Reader();
-  editForm!: FormGroup;
-  isLoading = false;
-  submitted = false;
-  @Input() title: any;
   
-  constructor(private route: ActivatedRoute,  private readerService: ReaderService, public formBuilder: FormBuilder ) { }
- 
-  ngOnInit() {  
-    let idReader = this.route.snapshot.params['id'];
-    this.setForm(idReader)
-  }
+  
+  
 
-  private setForm(idReader: number) {
+  public setForm(idReader: number) {
       this.readerService.getReaderById(idReader).subscribe(x => {
         this.selectedReader = x;
         console.log(this.selectedReader.id);
-
+        //
         this.editForm = this.formBuilder.group({
             id: [this.selectedReader.id],
             tipoReaderSel: [this.selectedReader.idTipoReader],
@@ -43,10 +31,7 @@ export class ReaderInpinjComponent implements OnInit {
             redPort: [this.selectedReader.redPort],
             yellowPort: [this.selectedReader.yellowPort]
         });
-      }
-      
-      )
-      
+      })   
   }
 
   submit() {

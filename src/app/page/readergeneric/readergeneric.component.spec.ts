@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ReaderGenericComponent } from './generic.component';
+import { ReaderGenericComponent } from './readergeneric.component';
 
-describe('InpinjComponent', () => {
+describe('ReaderGenericComponent', () => {
   let component: ReaderGenericComponent;
   let fixture: ComponentFixture<ReaderGenericComponent>;
 

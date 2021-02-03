@@ -5,9 +5,11 @@ import { ConfReaderComponent } from './page/confreader/confreader.component';
 import { LoginComponent } from './page/login/login.component';
 import { ControlPanelComponent } from './page/controlpanel/controlpanel.component';
 import { ManageReaderComponent } from './page/managereader/managereader.component';
-import { ReaderInpinjComponent } from './page/readerinpinj/readerinpinj.component';
-import { ReaderWiramaComponent } from './page/readerwirama/readerwirama.component';
+// import { ReaderInpinjComponent } from './page/readerinpinj/readerinpinj.component';
+// import { ReaderWiramaComponent } from './page/readerwirama/readerwirama.component';
 import { ReaderComponent } from './page/reader/reader.component';
+import { ReaderInpinjComponent } from './page/readergeneric/readerinpinj.component';
+import { ReaderWiramaComponent } from './page/readergeneric/readerwirama.component';
 
 
 const routes: Routes = [
