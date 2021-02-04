@@ -67,7 +67,8 @@ export class ReaderGenericComponent implements OnInit {
     modalRef.componentInstance.msg = error.error.message;
   }
  
-  
+ 
+ 
  
   
 

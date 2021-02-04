@@ -4,13 +4,13 @@
   
 <form [formGroup]="form" (ngSubmit)="submit()"  >
   <div class="form-group">
-      <label for="tipoReaderSel">Seleziona Tipo Reader</label>
-      <select formControlName="tipoReaderSel"   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tipoReaderSel.errors }">
+      <label for="idTipoReader">Seleziona Tipo Reader</label>
+      <select formControlName="idTipoReader"   class="form-control" [ngClass]="{ 'is-invalid': submitted && f.idTipoReader.errors }">
           <option disabled>Seleziona Reader da Configurare</option>
           <option *ngFor="let tipoReader of tipoReaderList" value="{{tipoReader.id}}">{{tipoReader.descrizione}}</option>
       </select>
-      <div *ngIf="submitted && f.tipoReaderSel.errors" class="invalid-feedback">
-          <div *ngIf="f.tipoReaderSel.errors.required">Tipo Reader obbligatorio</div>
+      <div *ngIf="submitted && f.idTipoReader.errors" class="invalid-feedback">
+          <div *ngIf="f.idTipoReader.errors.required">Tipo Reader obbligatorio</div>
       </div>
   </div>  
 

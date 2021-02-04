@@ -19,9 +19,10 @@ export class ReaderInpinjComponent extends ReaderGenericComponent implements OnI
         this.selectedReader = x;
         console.log(this.selectedReader.id);
         //
+       
         this.editForm = this.formBuilder.group({
             id: [this.selectedReader.id],
-            tipoReaderSel: [this.selectedReader.idTipoReader],
+            idTipoReader: [this.selectedReader.idTipoReader],
             ipAdress: [this.selectedReader.ipAdress],
             porta: [this.selectedReader.porta],
             separatore: [this.selectedReader.separatore],
@@ -41,6 +42,7 @@ export class ReaderInpinjComponent extends ReaderGenericComponent implements OnI
     this.isLoading = true;
     this.readerService.updateReader(this.editForm.value).subscribe(x => {
       this.isLoading = false;
+      this.router.navigateByUrl("managereader");
     },
     error => {
       console.log(error);
@@ -48,6 +50,7 @@ export class ReaderInpinjComponent extends ReaderGenericComponent implements OnI
     });
   }
  
+
   get f() { 
     return this.editForm.controls; 
   }

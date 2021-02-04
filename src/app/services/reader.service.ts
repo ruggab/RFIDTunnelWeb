@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Reader } from '../entity/reader';
 
 @Injectable({
   providedIn: 'root'
@@ -22,14 +23,26 @@ export class ReaderService {
     return this.http.get(`${baseUrl}/${id}`);
   }
 
-  createReader(readerForm:Object): Observable<Object> {
-    let baseUrl = 'http://localhost:8080/api/v1/creaReader';
+  createReader(readerForm:Reader): Observable<Object> {
+    let baseUrl = "";
+    if (readerForm.idTipoReader == 1) {
+        baseUrl = 'http://localhost:8080/api/v1/creaReaderInpinj';
+    } else {
+        baseUrl = 'http://localhost:8080/api/v1/creaReaderWirama';
+    }
+    
     return this.http.post(`${baseUrl}`, readerForm);
   }
 
 
-  updateReader(readerForm:Object): Observable<Object> {
-    let baseUrl = 'http://localhost:8080/api/v1/updateReader';
+  updateReader(readerForm:Reader): Observable<Object> {
+    //let baseUrl = 'http://localhost:8080/api/v1/updateReader';
+    let baseUrl = "";
+    if (readerForm.idTipoReader == 1) {         
+        baseUrl = 'http://localhost:8080/api/v1/updateReaderInpinj';
+    } else {
+        baseUrl = 'http://localhost:8080/api/v1/updateReaderWirama';
+    }
     return this.http.put(`${baseUrl}`, readerForm);
   }
 

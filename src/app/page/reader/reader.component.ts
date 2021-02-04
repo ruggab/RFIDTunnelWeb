@@ -26,7 +26,7 @@ export class ReaderComponent implements OnInit {
   }
 
   form = new FormGroup({
-    tipoReaderSel: new FormControl('', [Validators.required]),
+    idTipoReader: new FormControl('', [Validators.required]),
     ipAdress: new FormControl('', [Validators.required, Validators.maxLength(15)]),
     porta: new FormControl('', [Validators.required, Validators.maxLength(4)]),
     separatore: new FormControl('', [Validators.required, Validators.maxLength(1)])
@@ -67,7 +67,7 @@ export class ReaderComponent implements OnInit {
     console.log(this.form.value);
     this.readerService.createReader(this.form.value).subscribe(
       data => {
-        console.log(data);
+        console.log(data); 
         this.router.navigateByUrl("managereader")
       },error => {
         console.log(error);
