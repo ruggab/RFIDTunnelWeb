@@ -21,6 +21,7 @@ import { ReaderWiramaComponent } from './page/readergeneric/readerwirama.compone
 import { ReaderInpinjComponent } from './page/readergeneric/readerinpinj.component';
 import { ReaderGenericComponent } from './page/readergeneric/readergeneric.component';
 import { ReaderComponent } from './page/reader/reader.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ReaderComponent } from './page/reader/reader.component';
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
+    BrowserAnimationsModule,
   
   ],
   providers: [],
