@@ -22,6 +22,7 @@ import { ReaderInpinjComponent } from './page/readergeneric/readerinpinj.compone
 import { ReaderGenericComponent } from './page/readergeneric/readergeneric.component';
 import { ReaderComponent } from './page/reader/reader.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     NgSelectModule,
     BrowserAnimationsModule,
+    SharedModule
   
   ],
   providers: [],
