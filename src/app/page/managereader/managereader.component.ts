@@ -1,38 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ReaderService } from "../../services/reader.service";
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
 import { HttpErrorResponse } from "@angular/common/http";
 import { Reader } from 'src/app/entity/reader';
 import { Router } from '@angular/router';
+import {MatTableDataSource} from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-managereader',
   templateUrl: './managereader.component.html',
   styleUrls: ['./managereader.component.css']
 })
+ 
 
 export class ManageReaderComponent implements OnInit {
  
   readerList : Array<Reader> = [];
-  
- 
   loading: boolean = false; 
-  
   submitted = false;
+  dataSource= new MatTableDataSource();
 
-
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private readerService: ReaderService, private modalService: NgbModal, private router:Router) { 
-   
+     
   }
-  
+
   
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.onload();
+    
   }
 
+  onload() {
+    this.setReadersList();
+  }
   
 
   private setReadersList(){
@@ -41,6 +46,8 @@ export class ManageReaderComponent implements OnInit {
         console.log(data);
        
         this.readerList = data;
+        this.dataSource = new MatTableDataSource(data);
+        this.dataSource.sort = this.sort;
       },error => {
         console.log(error);
         
@@ -48,9 +55,7 @@ export class ManageReaderComponent implements OnInit {
     });
   }
 
-  onload() {
-    this.setReadersList();
-  }
+ 
   
  
 

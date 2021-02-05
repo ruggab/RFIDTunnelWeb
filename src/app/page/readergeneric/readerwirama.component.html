@@ -29,12 +29,58 @@
           </div>
         </div>
 
-    
-          
-       
         <div class="form-group">
           <button  class="btn btn-success" >Salva</button>
         </div>
+
+
+
+        <!--mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8"  >
+    
+          <ng-container matColumnDef="idTipoReader">
+            <mat-header-cell *matHeaderCellDef> Tipo Reader </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.idTipoReader}} </mat-cell>
+          </ng-container>
+        
+          
+          <ng-container matColumnDef="ipAdress"  >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Indirizzo Ip </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.ipAdress}} </mat-cell>
+          </ng-container>
+        
+         
+          <ng-container matColumnDef="porta" >
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Porta </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.porta}} </mat-cell>
+          </ng-container>
+    
+           
+           <ng-container matColumnDef="separatore">
+            <mat-header-cell *matHeaderCellDef> Separatore </mat-header-cell>
+            <mat-cell *matCellDef="let row"> {{row.separatore}} </mat-cell>
+          </ng-container>
+        
+          <ng-container matColumnDef="update">
+            <th mat-header-cell *matHeaderCellDef> Update </th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button color="accent" (click)="editItem(row)">
+                  <mat-icon class="mat-18">edit</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="delete">
+              <th mat-header-cell *matHeaderCellDef> Delete </th>
+              <td mat-cell *matCellDef="let row">
+                <button mat-icon-button color="warn" (click)="deleteItem(row)">
+                    <mat-icon class="mat-18">delete</mat-icon>
+                </button>
+              </td>
+            </ng-container>
+    
+    
+          <mat-header-row *matHeaderRowDef="['idTipoReader', 'ipAdress', 'porta', 'separatore', 'update', 'delete']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['idTipoReader', 'ipAdress', 'porta', 'separatore',  'update', 'delete']"></mat-row>
+        </mat-table--> 
     
     </form>
 </div>

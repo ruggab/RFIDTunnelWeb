@@ -1,5 +1,11 @@
-.container {
-    display: flex;
-    justify-content: center;
-  }
-  
+table {
+  width: 90%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-width: 500px;
+}
+
+th.mat-header-cell {
+  text-align: left;
+  max-width: 300px;
+}
