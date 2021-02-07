@@ -44,5 +44,30 @@ export class Reader {
 /*  # --------- PRINT PARAMETERS ------------*/
 	
 	printDetails!: string | null;
+
+
+	private _listAntenna!: Array<Antenna>;
+  
+	get listAntenna(): Array<Antenna> {
+        return this._listAntenna;
+    }
+    set listAntenna(value: Array<Antenna>) {
+        this._listAntenna = value;
+    }
   
 }  
+
+
+export class Antenna {
+
+	id!: number;
+	idReader!:number;
+	maxRxSensitivity!:string;
+	maxTxPower!:string;
+	powerinDbm!:string;
+	sensitivityinDbm!:string;
+}
+
+
+
+

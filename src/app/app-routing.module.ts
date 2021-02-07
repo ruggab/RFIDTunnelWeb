@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './page/home/home.component';
-import { ConfReaderComponent } from './page/confreader/confreader.component';
 import { LoginComponent } from './page/login/login.component';
 import { ControlPanelComponent } from './page/controlpanel/controlpanel.component';
 import { ManageReaderComponent } from './page/managereader/managereader.component';
@@ -13,7 +12,6 @@ import { ReaderWiramaComponent } from './page/readergeneric/readerwirama.compone
 const routes: Routes = [
   {path: "", pathMatch: "full",redirectTo:  "login"},
   {path: "home", component: HomeComponent},
-  {path: "confreader", component: ConfReaderComponent},
   {path: "login", component: LoginComponent},
   {path: "controlpanel", component: ControlPanelComponent},
   {path: "managereader", component: ManageReaderComponent},

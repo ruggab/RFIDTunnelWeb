@@ -17,7 +17,7 @@ import { MatSort } from '@angular/material/sort';
 
 export class ManageReaderComponent implements OnInit {
  
-  readerList : Array<Reader> = [];
+ // readerList : Array<Reader> = [];
   loading: boolean = false; 
   submitted = false;
   dataSource= new MatTableDataSource();
@@ -28,16 +28,10 @@ export class ManageReaderComponent implements OnInit {
      
   }
 
-  
-
   ngOnInit() {
-    this.onload();
-    
-  }
-
-  onload() {
     this.setReadersList();
   }
+
   
 
   private setReadersList(){
@@ -45,7 +39,7 @@ export class ManageReaderComponent implements OnInit {
       data => {
         console.log(data);
        
-        this.readerList = data;
+       // this.readerList = data;
         this.dataSource = new MatTableDataSource(data);
         this.dataSource.sort = this.sort;
       },error => {
@@ -80,18 +74,14 @@ export class ManageReaderComponent implements OnInit {
   
   editItem(reader:Reader)
   {
-    
-    
+
     if (reader.idTipoReader===1){
       this.router.navigateByUrl(`readerinpinj/${reader.id}`);
     }
     if (reader.idTipoReader===2){
       this.router.navigateByUrl(`readerwirama/${reader.id}`);
     }
-    
-    
     console.log(reader) ; 
-   
   }
   
   

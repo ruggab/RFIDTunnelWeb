@@ -35,15 +35,15 @@ export class ReaderService {
   }
 
 
-  updateReader(readerForm:Reader): Observable<Object> {
+  updateReader(reader:Reader): Observable<Object> {
     //let baseUrl = 'http://localhost:8080/api/v1/updateReader';
     let baseUrl = "";
-    if (readerForm.idTipoReader == 1) {         
+    if (reader.idTipoReader == 1) {         
         baseUrl = 'http://localhost:8080/api/v1/updateReaderInpinj';
     } else {
         baseUrl = 'http://localhost:8080/api/v1/updateReaderWirama';
     }
-    return this.http.put(`${baseUrl}`, readerForm);
+    return this.http.put(`${baseUrl}`, reader);
   }
 
   deleteReader(id: number): Observable<any> {
@@ -54,6 +54,11 @@ export class ReaderService {
   getReaderList(): Observable<any> {
     let baseUrl = 'http://localhost:8080/api/v1/allreader';
     return this.http.get(`${baseUrl}`);
+  }
+
+  getAntennaList(idReader: number): Observable<any> {
+    let baseUrl = 'http://localhost:8080/api/v1/allAntenna';
+    return this.http.get(`${baseUrl}/${idReader}`);
   }
 
 

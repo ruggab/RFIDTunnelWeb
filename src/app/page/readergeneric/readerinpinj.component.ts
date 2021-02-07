@@ -35,20 +35,7 @@ export class ReaderInpinjComponent extends ReaderGenericComponent implements OnI
       })   
   }
 
-  submit() {
-    if (this.editForm.invalid || this.isLoading) {
-      return;
-    }
-    this.isLoading = true;
-    this.readerService.updateReader(this.editForm.value).subscribe(x => {
-      this.isLoading = false;
-      this.router.navigateByUrl("managereader");
-    },
-    error => {
-      console.log(error);
-      this.isLoading = false;
-    });
-  }
+ 
  
 
   get f() { 

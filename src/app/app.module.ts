@@ -7,14 +7,10 @@ import { HomeComponent } from './page/home/home.component';
 import { HeaderComponent } from './page/common/header/header.component';
 import { FooterComponent } from './page/common/footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MatButtonModule } from '@angular/material/button';
 import { ModalComponent } from './page/common/modal/modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ConfReaderComponent } from './page/confreader/confreader.component';
 import { LoginComponent } from './page/login/login.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { WiramaComponent } from './page/modalwirama/wirama.component';
-import { InpinjComponent } from './page/modalinpinj/inpinj.component';
 import { ControlPanelComponent } from './page/controlpanel/controlpanel.component';
 import { ManageReaderComponent } from './page/managereader/managereader.component';
 import { ReaderWiramaComponent } from './page/readergeneric/readerwirama.component';
@@ -23,6 +19,7 @@ import { ReaderGenericComponent } from './page/readergeneric/readergeneric.compo
 import { ReaderComponent } from './page/reader/reader.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { AntennaComponent } from './page/antenna/antenna.component';
 
 @NgModule({
   declarations: [
@@ -31,22 +28,19 @@ import { SharedModule } from './shared/shared.module';
     HeaderComponent,
     FooterComponent,
     ModalComponent,
-    WiramaComponent,
-    InpinjComponent,
-    ConfReaderComponent,
     ManageReaderComponent,
     LoginComponent,
     ReaderGenericComponent,
     ReaderWiramaComponent,
     ReaderInpinjComponent,
     ReaderComponent,
+    AntennaComponent,
     ControlPanelComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MatButtonModule,
     NgbModule,
     FormsModule,
     ReactiveFormsModule,

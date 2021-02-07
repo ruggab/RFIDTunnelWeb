@@ -1,94 +1,43 @@
+<div class="add-title">
+    <h2 class="primary">Aggiungi Antenna</h2>
+</div>
 <div class="container" style="margin-top: 70px;"  >
     <div style="width: 40%;"  >
-    
-    
-<form [formGroup]="form" (ngSubmit)="submit()"  >
-    <div class="form-group">
-        <label for="tipoReaderSel">Seleziona Tipo Reader</label>
-        <select formControlName="tipoReaderSel"  (change)="changeTipoReader($event)" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.tipoReaderSel.errors }">
-            <option disabled>Seleziona Reader da Configurare</option>
-            <option *ngFor="let tipoReader of tipoReaderList" value="{{tipoReader.id}}">{{tipoReader.descrizione}}</option>
-        </select>
-        <div *ngIf="submitted && f.tipoReaderSel.errors" class="invalid-feedback">
-            <div *ngIf="f.tipoReaderSel.errors.required">Tipo Reader obbligatorio</div>
-        </div>
-    </div>  
+        <form [formGroup]="form"   >
+            <input formControlName="id" id="id"   type="hidden" class="form-control" > 
+            <input formControlName="idReader" id="idReader"   type="hidden" class="form-control" > 
 
-    <div class="form-group" >
-        <label for="ipAdress">Indirizzo Ip</label>
-        <input formControlName="ipAdress" id="ipAdress"   type="text" class="form-control"  [ngClass]="{ 'is-invalid': submitted && f.ipAdress.errors }" maxlength="15"> 
-        <div *ngIf="submitted && f.ipAdress.errors" class="invalid-feedback">
-            <div *ngIf="f.ipAdress.errors.required">Ip Adress Obbligatorio.</div>
-        </div>
+            <div class="form-group" >
+                <label for="maxRxSensitivity">maxRxSensitivity</label>
+                <input formControlName="maxRxSensitivity" id="maxRxSensitivity"   type="text" class="form-control" > 
+                
+            </div>
+
+            <div class="form-group">
+                <label for="maxTxPower">maxTxPower</label>
+                <input formControlName="maxTxPower" id="maxTxPower"   type="text" class="form-control"  >
+                
+            </div>
+
+            <div class="form-group">
+                <label for="powerinDbm">powerinDbm</label>
+                <input formControlName="powerinDbm" id="powerinDbm"   type="text" class="form-control"  >
+                
+            </div>
+
+            <div class="form-group">
+                <label for="sensitivityinDbm">sensitivityinDbm</label>
+                <input formControlName="sensitivityinDbm" id="sensitivityinDbm"   type="text" class="form-control"  >
+            </div>
+
+            <div class="btn-sec">
+                <button mat-raised-button type="button" color="primary" class="Update-btn" (click)="onAddAntenna()">Aggiungi</button>
+                <button mat-raised-button type="button" class="Discard-btn"   (click)="onAnnulla()" >Annula</button>
+            </div>
+        </form>
     </div>
-
-    <div class="form-group">
-        <label for="porta">Porta</label>
-        <input formControlName="porta" id="porta"   type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.porta.errors }" maxlength="4" (keypress)="numberOnly($event)" >
-        <div *ngIf="submitted && f.porta.errors" class="invalid-feedback">
-            <div *ngIf="f.porta.errors.required">Porta Obbligatoria.</div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="numAntenne">Num. Antenne</label>
-        <input formControlName="numAntenne" id="numAntenne"   type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.numAntenne.errors }" maxlength="4" (keypress)="numberOnly($event)" >
-        <div *ngIf="submitted && f.numAntenne.errors" class="invalid-feedback">
-            <div *ngIf="f.numAntenne.errors.required">Numero Antenne Obbligatorio</div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label for="separatore">Separatore</label>
-        <input formControlName="separatore" id="separatore"   type="text" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.separatore.errors }" maxlength="1"  >
-        <div *ngIf="submitted && f.separatore.errors" class="invalid-feedback">
-            <div *ngIf="f.separatore.errors.required">Separatore Obbligatoria.</div>
-        </div>
-    </div>
-   
-    
-    <div class="form-group"  >
-        <button  class="btn btn-primary" >
-            AGGIUNGI
-        </button>
-    </div>  
-
-</form>
-</div>
 </div>
 
 
-<table class="table" *ngIf="readerList">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Tipo Reader</th>
-        <th scope="col">Indirizzo Ip</th>
-        <th scope="col">Porta</th>
-        <th scope="col">Separatore</th>
-        <th scope="col">Nr. Antenne</th>
-        <th scope="col">Azioni</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let reader of readerList, let i = index">
-        <th scope="row">{{i}}</th>
-        <td>{{reader.idTipoReader}}</td>
-        <td>{{reader.ipAdress}}</td>
-        <td>{{reader.porta}}</td>
-        <td>{{reader.numAntenne}}</td>
-        <td>{{reader.separatore}}</td>
-        <td>
-           
-            <button class="btn btn-primary m-2" (click)="editItem(reader)">Modifica</button>
-            <button class="btn btn-secondary m-2" (click)="deleteItem(reader)">Cancella</button>
-            <button class="btn btn-success m-2" (click)="editAntenne(reader)">Antenne</button>
-            <!--button class="btn btn-danger m-2" (click)="stopReader(reader)">Stop</button-->
-        </td>
-      </tr>
-    </tbody>
-  </table>
 
 
-
-<!-- [gridOptions]="gridOptions"   -->

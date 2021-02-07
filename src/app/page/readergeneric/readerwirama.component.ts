@@ -16,6 +16,9 @@ export class ReaderWiramaComponent extends ReaderGenericComponent implements OnI
     this.readerService.getReaderById(idReader).subscribe(x => {
       this.selectedReader = x;
       console.log(this.selectedReader.id);
+      console.log("reader-->" + this.selectedReader);
+      console.log("listantenna-->" + this.selectedReader.listAntenna);
+      this.setAntennaArray(this.selectedReader.listAntenna);
       this.editForm = this.formBuilder.group({
           id: [this.selectedReader.id],
           idTipoReader: [this.selectedReader.idTipoReader],
@@ -24,23 +27,20 @@ export class ReaderWiramaComponent extends ReaderGenericComponent implements OnI
           separatore: [this.selectedReader.separatore]
       });
     }) 
+    //
+   // this.setAntennaList(idReader);
+    
+
+    
   }
 
+  
 
-  submit() {
-    if (this.editForm.invalid || this.isLoading) {
-      return;
-    }
-    this.isLoading = true;
-    this.readerService.updateReader(this.editForm.value).subscribe(x => {
-      this.isLoading = false;
-      this.router.navigateByUrl("managereader");
-    },
-      error => {
-        console.log(error);
-        this.isLoading = false;
-      });
-  }
+
+
+
+
+ 
  
   get f() { 
     return this.editForm.controls; 
