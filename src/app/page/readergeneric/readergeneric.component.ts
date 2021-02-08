@@ -124,7 +124,8 @@ export class ReaderGenericComponent implements OnInit {
   deleteItem(antenna:Antenna)
   {
     console.log(antenna);
-    this.selectedReader.listAntenna.splice(antenna.id)
+    const index = this.selectedReader.listAntenna.indexOf(antenna);
+    this.selectedReader.listAntenna.splice(index, 1)
     this.antennaTable= new MatTableDataSource(this.selectedReader.listAntenna);
   }
   

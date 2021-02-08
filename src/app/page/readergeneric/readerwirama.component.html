@@ -45,13 +45,13 @@
           </button>
 
         <mat-table [dataSource]="antennaTable"  class="mat-elevation-z8"  >
-    
-          <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef> id Antenna </mat-header-cell>
-            <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+
+          <ng-container matColumnDef="position">
+            <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
           </ng-container>
-        
-          
+         
+         
           <ng-container matColumnDef="maxRxSensitivity"  >
             <mat-header-cell *matHeaderCellDef > Max Rx Sensitivity </mat-header-cell>
             <mat-cell *matCellDef="let row"> {{row.maxRxSensitivity}} </mat-cell>
@@ -84,11 +84,12 @@
               </td>
             </ng-container>
     
-           
-           
+          <mat-header-row *matHeaderRowDef="['position', 'maxRxSensitivity', 'maxTxPower', 'powerinDbm', 'sensitivityinDbm', 'delete']"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: ['position', 'maxRxSensitivity', 'maxTxPower', 'powerinDbm', 'sensitivityinDbm', 'delete']"></mat-row>
         
-          <mat-header-row *matHeaderRowDef="['id', 'maxRxSensitivity', 'maxTxPower', 'powerinDbm', 'sensitivityinDbm', 'delete']"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: ['id', 'maxRxSensitivity', 'maxTxPower', 'powerinDbm', 'sensitivityinDbm', 'delete']"></mat-row>
+        
+          
+         
         </mat-table> 
 
     </div>  

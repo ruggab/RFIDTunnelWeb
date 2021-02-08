@@ -35,12 +35,6 @@ export class ReaderWiramaComponent extends ReaderGenericComponent implements OnI
   }
 
   
-
-
-
-
-
- 
  
   get f() { 
     return this.editForm.controls; 

@@ -38,6 +38,7 @@ export class AntennaComponent implements OnInit {
       this.form = this.formBuilder.group({
         id: new FormControl(''),
         idReader: new FormControl(this.selectedReader.id),
+        position: new FormControl(this.selectedReader.listAntenna.length+1),
         maxRxSensitivity: new FormControl(false),
         maxTxPower: new FormControl(false),
         powerinDbm: new FormControl(''),
