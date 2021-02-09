@@ -23,3 +23,15 @@
 #modal-cancel-button {
     background-color: #4e4e4e;
 }
+
+table {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    min-width: 500px;
+}
+
+th.mat-header-cell {
+    text-align: left;
+    max-width: 300px;
+}

@@ -94,8 +94,13 @@ export class AntennaComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+    if (!this.selectedAntenna) {
+      this.selectedReader.listAntenna.push(this.form.value);
+    } else {
+      const index = this.selectedReader.listAntenna.indexOf(this.selectedAntenna);
+      this.selectedReader.listAntenna[index] = this.form.value;
+    }
     
-    this.selectedReader.listAntenna.push(this.form.value);
     this.dialogRef.close();
   }
 
