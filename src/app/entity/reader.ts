@@ -61,12 +61,13 @@ export class Reader {
 export class Antenna {
 
 	id!: number;
-	position!:number;
 	idReader!:number;
-	maxRxSensitivity!:string;
-	maxTxPower!:string;
-	powerinDbm!:string;
-	sensitivityinDbm!:string;
+	position!:number;
+	enable!:boolean;
+	maxRxSensitivity!:boolean;
+	maxTxPower!:boolean;
+	powerinDbm!:number;
+	sensitivityinDbm!:number;
 }
 
 

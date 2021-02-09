@@ -103,16 +103,7 @@ export class ReaderGenericComponent implements OnInit {
     });
   }
  
-  // public setAntennaList(idReader: number){
-  //   this.readerService.getAntennaList(idReader).subscribe(
-  //     data => {
-  //       console.log(data);
-  //       this.antennaTable= new MatTableDataSource(data);
-  //     },error => {
-  //       console.log(error);
-  //       this.openErrorDialog(error);
-  //   });
-  // }
+
 
   
   public setAntennaArray(listAntenna: Array<Antenna>){
@@ -127,6 +118,24 @@ export class ReaderGenericComponent implements OnInit {
     const index = this.selectedReader.listAntenna.indexOf(antenna);
     this.selectedReader.listAntenna.splice(index, 1)
     this.antennaTable= new MatTableDataSource(this.selectedReader.listAntenna);
+  }
+
+  editItem(antenna:Antenna) {
+    const index = this.selectedReader.listAntenna.indexOf(antenna);
+    
+    this.matDialogRef = this.matDialog.open(AntennaComponent, {
+      data: { selectedAntenna: this.selectedReader.listAntenna[index] },
+      disableClose: true,
+      width: '640px'//,disableClose: true 
+    });
+
+    this.matDialogRef.afterClosed().subscribe(res => {
+      this.antennaTable= new MatTableDataSource(this.selectedReader.listAntenna);
+      if ((res == true)) {
+       console.log(res);
+       console.log(this.selectedReader);
+      }
+    });
   }
   
 

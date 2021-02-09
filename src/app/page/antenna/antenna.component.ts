@@ -4,7 +4,7 @@ import { ReaderService } from "../../services/reader.service";
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
 import { HttpErrorResponse } from "@angular/common/http";
-import { Reader } from 'src/app/entity/reader';
+import { Antenna, Reader } from 'src/app/entity/reader';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -18,6 +18,7 @@ export class AntennaComponent implements OnInit {
   submitted!:boolean;
   selectedReader!:Reader;
   form!:FormGroup;
+  selectedAntenna!:Antenna;
   
   constructor(public readerService: ReaderService, 
               public modalService: NgbModal,
@@ -27,10 +28,16 @@ export class AntennaComponent implements OnInit {
               ) 
   { 
     this.selectedReader =  data.selectedReader;
+    this.selectedAntenna =  data.selectedAntenna;
   }
   
   ngOnInit(): void {
-    this.setForm();
+    if (this.selectedReader) {
+      this.setForm();
+    } else {
+      this.setEditForm();
+    }
+   
   }
 
 	public setForm() {
@@ -39,10 +46,25 @@ export class AntennaComponent implements OnInit {
         id: new FormControl(''),
         idReader: new FormControl(this.selectedReader.id),
         position: new FormControl(this.selectedReader.listAntenna.length+1),
+        enable: new FormControl(false),
         maxRxSensitivity: new FormControl(false),
         maxTxPower: new FormControl(false),
         powerinDbm: new FormControl(''),
         sensitivityinDbm: new FormControl('')
+      });
+    }
+
+    public setEditForm() {
+   
+      this.form = this.formBuilder.group({
+        id: new FormControl(this.selectedAntenna.id),
+        idReader: new FormControl(this.selectedAntenna.idReader),
+        position: new FormControl(this.selectedAntenna.position),
+        enable: new FormControl(this.selectedAntenna.enable),
+        maxRxSensitivity: new FormControl(this.selectedAntenna.maxRxSensitivity),
+        maxTxPower: new FormControl(this.selectedAntenna.maxTxPower),
+        powerinDbm: new FormControl(this.selectedAntenna.powerinDbm),
+        sensitivityinDbm: new FormControl(this.selectedAntenna.sensitivityinDbm)
       });
     }
   
@@ -80,6 +102,22 @@ export class AntennaComponent implements OnInit {
   onAnnulla() {
     this.dialogRef.close();
   }
+
+  numberOnly(event:any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      return false;
+    }
+    return true;
+  }
+
+  validateNumber(e: any) {
+    let input = String.fromCharCode(e.charCode);
+    const reg = /^\d+(\.\d{1,2})?$/;
+    if (!reg.test(input)) {
+      e.preventDefault();
+    }
+}
 
 
 
