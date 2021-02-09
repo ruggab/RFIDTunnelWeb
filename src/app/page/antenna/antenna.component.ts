@@ -32,10 +32,10 @@ export class AntennaComponent implements OnInit {
   }
   
   ngOnInit(): void {
-    if (this.selectedReader) {
-      this.setForm();
-    } else {
+    if (this.selectedAntenna) {
       this.setEditForm();
+    } else {
+      this.setForm();
     }
    
   }
@@ -107,24 +107,5 @@ export class AntennaComponent implements OnInit {
   onAnnulla() {
     this.dialogRef.close();
   }
-
-  numberOnly(event:any): boolean {
-    const charCode = (event.which) ? event.which : event.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-      return false;
-    }
-    return true;
-  }
-
-  validateNumber(e: any) {
-    let input = String.fromCharCode(e.charCode);
-    const reg = /^\d+(\.\d{1,2})?$/;
-    if (!reg.test(input)) {
-      e.preventDefault();
-    }
-}
-
-
-
 }
  

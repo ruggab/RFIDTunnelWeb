@@ -124,7 +124,8 @@ export class ReaderGenericComponent implements OnInit {
     const index = this.selectedReader.listAntenna.indexOf(antenna);
     
     this.matDialogRef = this.matDialog.open(AntennaComponent, {
-      data: { selectedAntenna: this.selectedReader.listAntenna[index] },
+      data: { selectedAntenna: this.selectedReader.listAntenna[index],
+              selectedReader: this.selectedReader},
       disableClose: true,
       width: '640px'//,disableClose: true 
     });
@@ -153,6 +154,10 @@ export class ReaderGenericComponent implements OnInit {
       console.log(error);
       this.isLoading = false;
     });
+  }
+
+  indietro(){
+    this.router.navigateByUrl("managereader");
   }
 
 }

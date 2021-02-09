@@ -17,9 +17,7 @@ export class ReaderInpinjComponent extends ReaderGenericComponent implements OnI
   public setForm(idReader: number) {
       this.readerService.getReaderById(idReader).subscribe(x => {
         this.selectedReader = x;
-        console.log(this.selectedReader.id);
-        //
-       
+        this.setAntennaArray(this.selectedReader.listAntenna);
         this.editForm = this.formBuilder.group({
             id: [this.selectedReader.id],
             idTipoReader: [this.selectedReader.idTipoReader],

@@ -6,6 +6,12 @@ table {
 }
 
 th.mat-header-cell {
-  text-align: left;
+  text-align: left!important;
   max-width: 300px;
+}
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
+    padding: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: none!important;
 }
