@@ -41,3 +41,12 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
     border-bottom-width: 1px;
     border-bottom-style: none!important;
 }
+
+
+
+.border-class
+{
+  border:thin rgb(180, 176, 176) solid;
+  margin:20px;
+  padding:20px;
+}
