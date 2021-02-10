@@ -21,24 +21,34 @@
       <mat-cell *matCellDef="let row"> {{row.porta}} </mat-cell>
     </ng-container>
 
-
-
-
-    <ng-container matColumnDef="azioni">
-      <mat-header-cell *matHeaderCellDef class="left"> Azioni </mat-header-cell>
-      <mat-cell *matCellDef="let row">
-        <button mat-icon-button color="primary" (click)="startReader(row)">
-            <mat-icon class="mat-2">edit</mat-icon>
+    <ng-container matColumnDef="stato">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Stato </mat-header-cell>
+      <mat-cell *matCellDef="let row" >
+        <button mat-icon-button color="success"  *ngIf="row.stato">
+          <mat-icon >task_alt</mat-icon>
         </button>
-      
-        <button mat-icon-button color="warn" (click)="stopReader(row)">
-            <mat-icon >delete</mat-icon>
+        <button mat-icon-button  color="warn" *ngIf="!row.stato">
+          <mat-icon >highlight_off</mat-icon>
         </button>
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['idTipoReader', 'ipAdress', 'porta', 'azioni' ]"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: ['idTipoReader', 'ipAdress', 'porta', 'azioni']"></mat-row>
+
+    <ng-container matColumnDef="azioni">
+      <mat-header-cell *matHeaderCellDef > Azioni </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" (click)="startReader(row)">
+            <mat-icon >play_arrow</mat-icon>
+        </button>
+      
+        <button mat-icon-button color="warn" (click)="stopReader(row)">
+            <mat-icon >stop</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['idTipoReader', 'ipAdress', 'porta', 'stato', 'azioni' ]"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['idTipoReader', 'ipAdress', 'porta','stato', 'azioni']"></mat-row>
 
 
   </mat-table>

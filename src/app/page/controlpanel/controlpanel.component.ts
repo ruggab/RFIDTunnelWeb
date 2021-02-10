@@ -43,6 +43,7 @@ export class ControlPanelComponent implements OnInit {
   private setReadersList(){
     this.readerService.getReaderList().subscribe(
       data => {
+        console.log(data);
         this.readerList = new MatTableDataSource(data);
       },error => {
         console.log(error);
@@ -63,7 +64,8 @@ export class ControlPanelComponent implements OnInit {
     this.readerService.startReader(reader).subscribe(
       data => {
         console.log(data);
-        this.openDialog(data) 
+        this.readerList = new MatTableDataSource(data);
+        //this.openDialog(data) 
         
       },error => {
         console.log(error);
@@ -77,7 +79,8 @@ export class ControlPanelComponent implements OnInit {
     this.readerService.stopReader(reader).subscribe(
       data => {
         console.log(data);
-        this.openDialog(data) 
+        this.readerList = new MatTableDataSource(data);
+        //this.openDialog(data) 
         
       },error => {
         console.log(error);
