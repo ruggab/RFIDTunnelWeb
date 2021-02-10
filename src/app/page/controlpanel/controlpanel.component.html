@@ -1,36 +1,46 @@
-<div class="container" style="margin-top: 70px;"  >
-   
-    
-    
+<div class="container" style="margin-top: 70px;">
 
 
 
-<table class="table" *ngIf="readerList">
-    <thead class="thead-light">
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Tipo Reader</th>
-        <th scope="col">Indirizzo Ip</th>
-        <th scope="col">Porta</th>
-        <th scope="col">Separatore</th>
-        <th scope="col">Azioni</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let reader of readerList, let i = index">
-        <th scope="row">{{i}}</th>
-        <td>{{reader.idTipoReader}}</td>
-        <td>{{reader.ipAdress}}</td>
-        <td>{{reader.porta}}</td>
-        <td>{{reader.separatore}}</td>
-        <td>
-            <button class="btn btn-success m-2" (click)="startReader(reader)">Start</button>
-            <button class="btn btn-danger m-2" (click)="stopReader(reader)">Stop</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <mat-table [dataSource]="readerList" matSort class="mat-elevation-z8">
+
+    <ng-container matColumnDef="idTipoReader">
+      <mat-header-cell *matHeaderCellDef> Tipo Reader </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.idTipoReader}} </mat-cell>
+    </ng-container>
+
+    <!-- Age Definition -->
+    <ng-container matColumnDef="ipAdress">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Indirizzo Ip </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.ipAdress}} </mat-cell>
+    </ng-container>
+
+    <!-- Title Definition -->
+    <ng-container matColumnDef="porta">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Porta </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.porta}} </mat-cell>
+    </ng-container>
 
 
+
+
+    <ng-container matColumnDef="azioni">
+      <mat-header-cell *matHeaderCellDef class="left"> Azioni </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" (click)="startReader(row)">
+          Start
+        </button>
+
+        <button mat-icon-button color="warn" (click)="stopReader(row)">
+          Stop
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['idTipoReader', 'ipAdress', 'porta', azioni' ]"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['idTipoReader', 'ipAdress', 'porta', 'azioni']"></mat-row>
+
+
+  </mat-table>
 
 </div>
