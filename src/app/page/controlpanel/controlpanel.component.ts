@@ -45,6 +45,7 @@ export class ControlPanelComponent implements OnInit {
       data => {
         console.log(data);
         this.readerList = new MatTableDataSource(data);
+        this.readerList.sort = this.sort;
       },error => {
         console.log(error);
         this.openErrorDialog(error);
@@ -65,7 +66,7 @@ export class ControlPanelComponent implements OnInit {
       data => {
         console.log(data);
         this.readerList = new MatTableDataSource(data);
-        //this.openDialog(data) 
+        this.readerList.sort = this.sort;
         
       },error => {
         console.log(error);

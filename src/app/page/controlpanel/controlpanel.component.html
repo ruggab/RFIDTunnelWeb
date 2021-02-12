@@ -17,12 +17,12 @@
 
     <!-- Title Definition -->
     <ng-container matColumnDef="porta">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Porta </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef > Porta </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.porta}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="stato">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Stato </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef > Stato </mat-header-cell>
       <mat-cell *matCellDef="let row" >
         <button mat-icon-button color="success"  *ngIf="row.stato">
           <mat-icon >task_alt</mat-icon>
