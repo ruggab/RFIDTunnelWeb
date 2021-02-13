@@ -28,7 +28,18 @@ export class ReaderInpinjComponent extends ReaderGenericComponent implements OnI
             onlinePort: [this.selectedReader.onlinePort],
             greenPort: [this.selectedReader.greenPort],
             redPort: [this.selectedReader.redPort],
-            yellowPort: [this.selectedReader.yellowPort]
+            yellowPort: [this.selectedReader.yellowPort],
+
+            createOutFile: [this.selectedReader.createOutFile],
+            nameOutLog: [this.selectedReader.nameOutLog],
+            extentionOutLog: [this.selectedReader.extentionOutLog],
+            createErrFile: [this.selectedReader.createErrFile],
+            nameErrLog: [this.selectedReader.nameErrLog],
+            extentionErrLog: [this.selectedReader.extentionErrLog],
+            
+           
+            
+
         });
       })   
   }
