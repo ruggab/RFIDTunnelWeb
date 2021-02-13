@@ -142,6 +142,8 @@ export class ReaderGenericComponent implements OnInit {
 
   submit() {
     console.log(this.selectedReader);
+    console.log(this.editForm.value);
+    this.selectedReader=this.editForm.value;
     if (this.editForm.invalid || this.isLoading) {
       return;
     }
