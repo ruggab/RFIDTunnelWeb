@@ -23,6 +23,8 @@ export class ReaderGenericComponent implements OnInit {
   public isLoading = false;
   public submitted = false;
   public idReader!: number;
+  //Appoggio utilizzato per l'update del reader
+  public appoAntennaList:  Array<Antenna> = [];
 
   antennaTable= new MatTableDataSource(Array<Antenna>());
   //public antennaList:  Array<Antenna> = [];
@@ -143,7 +145,10 @@ export class ReaderGenericComponent implements OnInit {
   submit() {
     console.log(this.selectedReader);
     console.log(this.editForm.value);
+    //Gestione modifica list antenna
+    this.appoAntennaList = this.selectedReader.listAntenna;
     this.selectedReader=this.editForm.value;
+    this.selectedReader.listAntenna = this.appoAntennaList;
     if (this.editForm.invalid || this.isLoading) {
       return;
     }
@@ -151,11 +156,16 @@ export class ReaderGenericComponent implements OnInit {
     this.readerService.updateReader(this.selectedReader).subscribe(x => {
       this.isLoading = false;
       this.router.navigateByUrl("managereader");
-    },
-    error => {
+    }, error => {
       console.log(error);
       this.isLoading = false;
+      this.openErrorDialog(error);
     });
+   
+      
+     
+
+
   }
 
   indietro(){

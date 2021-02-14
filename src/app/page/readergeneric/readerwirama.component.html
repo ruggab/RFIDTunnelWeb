@@ -1,18 +1,18 @@
 <div class="container" style="margin-top: 70px;">
 
+  <div class="border-class">
 
 
+    <form [formGroup]="editForm" (ngSubmit)="submit()" *ngIf="editForm">
+      <div class="form-group">
+        <button class="btn btn-success">
+          Salva
+        </button>
+        <button mat-flat-button color="warn" type="button" (click)="indietro()" style="margin:0px 20px;">
+          Indietro
+        </button>
+      </div>
 
-  <form [formGroup]="editForm" (ngSubmit)="submit()" *ngIf="editForm">
-    <div class="form-group">
-      <button class="btn btn-success">
-        Salva
-      </button>
-      <button mat-flat-button color="warn" type="button" (click)="indietro()" style="margin:0px 20px;">
-        Indietro
-      </button>
-    </div>
-    <div class="border-class">
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="idTipoReader">Seleziona Tipo Reader</label>
@@ -41,79 +41,72 @@
         </div>
       </div>
 
+    </form>
 
 
-      <div class="form-group">
-        <button mat-flat-button color="primary" type="button" (click)="openModal()" style="margin:0px 20px;">
-          Aggiungi Antenna
-        </button>
-      </div>
-
-      <mat-table [dataSource]="antennaTable" class="mat-elevation-z8">
-
-        <ng-container matColumnDef="position">
-          <mat-header-cell *matHeaderCellDef class="left"> No. </mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="enable" class="left">
-          <mat-header-cell *matHeaderCellDef>Attiva </mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.enable}}</mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="maxRxSensitivity">
-          <mat-header-cell *matHeaderCellDef class="left"> Max Rx Sensitivity </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.maxRxSensitivity}} </mat-cell>
-        </ng-container>
-
-
-        <ng-container matColumnDef="maxTxPower">
-          <mat-header-cell *matHeaderCellDef class="left"> Max Tx Power </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.maxTxPower}} </mat-cell>
-        </ng-container>
-
-
-        <ng-container matColumnDef="powerinDbm">
-          <mat-header-cell *matHeaderCellDef class="left"> Power in Dbm </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.powerinDbm}} </mat-cell>
-        </ng-container>
-
-        <ng-container matColumnDef="sensitivityinDbm">
-          <mat-header-cell *matHeaderCellDef class="left"> Sensitivity in Dbm </mat-header-cell>
-          <mat-cell *matCellDef="let row"> {{row.sensitivityinDbm}} </mat-cell>
-        </ng-container>
-
-
-
-        <ng-container matColumnDef="azioni">
-          <mat-header-cell *matHeaderCellDef> Azioni </mat-header-cell>
-          <mat-cell *matCellDef="let row">
-            <button mat-icon-button color="primary" (click)="editItem(row)">
-              <mat-icon class="mat-2">edit</mat-icon>
-            </button>
-
-            <button mat-icon-button color="warn" (click)="deleteItem(row)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </mat-cell>
-        </ng-container>
-
-        <mat-header-row
-          *matHeaderRowDef="['position', 'enable', 'maxRxSensitivity', 'maxTxPower', 'powerinDbm', 'sensitivityinDbm','azioni']">
-        </mat-header-row>
-        <mat-row
-          *matRowDef="let row; columns: ['position', 'enable', 'maxRxSensitivity', 'maxTxPower', 'powerinDbm', 'sensitivityinDbm', 'azioni']">
-        </mat-row>
-
-      </mat-table>
-
-
-
+    <div class="form-group">
+      <button mat-flat-button color="primary" type="button" (click)="openModal()" style="margin:0px 20px;">
+        Aggiungi Antenna
+      </button>
     </div>
-  </form>
+
+    <mat-table [dataSource]="antennaTable" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="position">
+        <mat-header-cell *matHeaderCellDef class="left"> No. </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.position}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="enable" class="left">
+        <mat-header-cell *matHeaderCellDef>Attiva </mat-header-cell>
+        <mat-cell *matCellDef="let row">{{row.enable}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="maxRxSensitivity">
+        <mat-header-cell *matHeaderCellDef class="left"> Max Rx Sensitivity </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.maxRxSensitivity}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="maxTxPower">
+        <mat-header-cell *matHeaderCellDef class="left"> Max Tx Power </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.maxTxPower}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="powerinDbm">
+        <mat-header-cell *matHeaderCellDef class="left"> Power in Dbm </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.powerinDbm}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="sensitivityinDbm">
+        <mat-header-cell *matHeaderCellDef class="left"> Sensitivity in Dbm </mat-header-cell>
+        <mat-cell *matCellDef="let row"> {{row.sensitivityinDbm}} </mat-cell>
+      </ng-container>
 
 
 
+      <ng-container matColumnDef="azioni">
+        <mat-header-cell *matHeaderCellDef> Azioni </mat-header-cell>
+        <mat-cell *matCellDef="let row">
+          <button mat-icon-button color="primary" (click)="editItem(row)">
+            <mat-icon class="mat-2">edit</mat-icon>
+          </button>
 
+          <button mat-icon-button color="warn" (click)="deleteItem(row)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row
+        *matHeaderRowDef="['position', 'enable', 'maxRxSensitivity', 'maxTxPower', 'powerinDbm', 'sensitivityinDbm','azioni']">
+      </mat-header-row>
+      <mat-row
+        *matRowDef="let row; columns: ['position', 'enable', 'maxRxSensitivity', 'maxTxPower', 'powerinDbm', 'sensitivityinDbm', 'azioni']">
+      </mat-row>
+
+    </mat-table>
+  </div>
 
 </div>
