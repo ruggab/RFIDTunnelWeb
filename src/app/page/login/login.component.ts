@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     submitted = false;
     returnUrl!: string;
     user!: User;
-    
+    error:any;
 
     constructor(
         public modalService: NgbModal,
@@ -32,8 +32,8 @@ export class LoginComponent implements OnInit {
 
    
     loginForm = new FormGroup({
-        username: new FormControl('', [Validators.required]),
-        password: new FormControl('', [Validators.required])
+        usr: new FormControl('', [Validators.required]),
+        psw: new FormControl('', [Validators.required])
     });
     
 
@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
         }
 
         this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
+        this.authenticationService.login(this.loginForm.value)
         .subscribe(
                 data => {
                     console.log(data);
@@ -69,7 +69,8 @@ export class LoginComponent implements OnInit {
                 error => {
                     console.log(error);
                     this.loading = false;
-                    this.openErrorDialog(error);
+                    this.error = error.error.message;
+                   // this.openErrorDialog(error);
                 });
     }
 
@@ -78,9 +79,6 @@ export class LoginComponent implements OnInit {
     openErrorDialog(error:HttpErrorResponse) {
         const modalRef = this.modalService.open(ModalComponent);
         modalRef.componentInstance.title = 'Error';
-        //let err = JSON.stringify(error);
-        //error = JSON.parse(err);
         modalRef.componentInstance.msg = error.message;
-        ;
       }
 }
