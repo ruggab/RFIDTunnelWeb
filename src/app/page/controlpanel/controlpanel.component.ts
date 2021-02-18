@@ -34,8 +34,8 @@ export class ControlPanelComponent implements OnInit {
   
 
     this.interval = setInterval(() => {
-      this.opensnack();
-    }, 1000)
+      this.setReadersList();
+    }, 10000)
 
   }
   
@@ -50,6 +50,9 @@ export class ControlPanelComponent implements OnInit {
         this.readerList = new MatTableDataSource(data);
         this.readerList.sort = this.sort;
       },error => {
+        if (this.interval) {
+          clearInterval(this.interval);
+        }
         console.log(error);
         this.openErrorDialog(error);
     });
@@ -99,11 +102,7 @@ export class ControlPanelComponent implements OnInit {
   }
 
 
-  opensnack() {
-    // I've just commented this so that you're not bombarded with an alert.
-    // alert(text);
-    console.log("aaaaa");
-  }
+  
 
   ngOnDestroy() {
     if (this.interval) {
