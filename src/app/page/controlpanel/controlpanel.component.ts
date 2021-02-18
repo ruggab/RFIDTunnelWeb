@@ -8,6 +8,7 @@ import {  HttpErrorResponse } from "@angular/common/http";
 import { Reader } from 'src/app/entity/reader';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-controlpanel',
@@ -19,14 +20,9 @@ export class ControlPanelComponent implements OnInit {
   //Select box
   tipoReaderList:  Array<TipoReader> = [];
   readerList : any;
-  
-  //GRID
-  loading: boolean = false; 
-  //rowData: any;
-  submitted = false;
+  interval:any;
   @ViewChild(MatSort) sort!: MatSort;
-  //frameworkComponents: any;
-  //api: any;
+
 
   constructor(public readerService: ReaderService, public modalService: NgbModal) { 
    
@@ -34,6 +30,13 @@ export class ControlPanelComponent implements OnInit {
   
   ngOnInit(): void {
     this.onload();
+    //Timer call
+  
+
+    this.interval = setInterval(() => {
+      this.opensnack();
+    }, 1000)
+
   }
   
   onload() {
@@ -94,6 +97,20 @@ export class ControlPanelComponent implements OnInit {
     modalRef.componentInstance.title = respose.stato;
     modalRef.componentInstance.msg = respose.msg;
   }
+
+
+  opensnack() {
+    // I've just commented this so that you're not bombarded with an alert.
+    // alert(text);
+    console.log("aaaaa");
+  }
+
+  ngOnDestroy() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
+
   
 
 }
