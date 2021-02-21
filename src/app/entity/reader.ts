@@ -8,6 +8,7 @@ export class Reader {
   porta!: string | null;
   separatore!: string | null;
   numAntenne!: string | null;
+  portaComandi!: string | null;
   
   //GPIO 
   activatePort!: string | null;

@@ -22,6 +22,7 @@ export class ReaderWiramaComponent extends ReaderGenericComponent implements OnI
           idTipoReader: [this.selectedReader.idTipoReader],
           ipAdress: [this.selectedReader.ipAdress],
           porta: [this.selectedReader.porta],
+          portaComandi: [this.selectedReader.portaComandi],
           separatore: [this.selectedReader.separatore]
       });
     }) 
