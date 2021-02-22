@@ -3,6 +3,7 @@
 
 
   <mat-table [dataSource]="readerList" matSort class="mat-elevation-z8">
+    
 
     <ng-container matColumnDef="idTipoReader">
       <mat-header-cell *matHeaderCellDef> Tipo Reader </mat-header-cell>
@@ -11,7 +12,7 @@
 
     <!-- Age Definition -->
     <ng-container matColumnDef="ipAdress">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Indirizzo Ip </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef > Indirizzo Ip </mat-header-cell>
       <mat-cell *matCellDef="let row"> {{row.ipAdress}} </mat-cell>
     </ng-container>
 

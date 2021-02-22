@@ -20,6 +20,7 @@ export class ReaderComponent implements OnInit {
   isLoading = false;
   submitted = false;
   @Input() title: any;
+  tipoReaderSelected = false;
 
   constructor(private readerService: ReaderService,public modalService: NgbModal,private router:Router) { 
     console.log("sono in reader")
@@ -28,12 +29,17 @@ export class ReaderComponent implements OnInit {
   form = new FormGroup({
     idTipoReader: new FormControl('', [Validators.required]),
     ipAdress: new FormControl('', [Validators.required, Validators.maxLength(15)]),
-    porta: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+    porta: new FormControl('', [ Validators.maxLength(4)]),
     separatore: new FormControl('', [Validators.required, Validators.maxLength(1)])
   });
  
   ngOnInit() { 
     this.setTipoReaders();
+  }
+
+  setTipoReaderSelected(){
+    this.tipoReaderSelected = true;
+    //console.log(this.form.controls.idTipoReader.value)
   }
 
   private setTipoReaders(){

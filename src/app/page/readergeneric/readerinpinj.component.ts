@@ -22,7 +22,7 @@ export class ReaderInpinjComponent extends ReaderGenericComponent implements OnI
             id: [this.selectedReader.id],
             idTipoReader: [this.selectedReader.idTipoReader],
             ipAdress: [this.selectedReader.ipAdress],
-            porta: [this.selectedReader.porta],
+           
             separatore: [this.selectedReader.separatore],
             activatePort: [this.selectedReader.activatePort],
             onlinePort: [this.selectedReader.onlinePort],
