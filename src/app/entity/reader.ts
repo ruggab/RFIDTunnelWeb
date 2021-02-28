@@ -10,15 +10,6 @@ export class Reader {
   numAntenne!: string | null;
   portaComandi!: string | null;
   
-  //GPIO 
-  activatePort!: string | null;
-  onlinePort!: string | null;
-  greenPort!: string | null;
-  redPort!: string | null;
-  yellowPort!: string | null;
-
-	
-	
 //	--------- LOG FILE PARAMETERS -----------
     createOutFile!: boolean; 	//S/N	
 	nameOutLog!: string | null;	//Z-OUT_	
@@ -27,9 +18,22 @@ export class Reader {
 	nameErrLog!: string | null;	//Z-ERR_	
 	extentionErrLog!: string | null;	//.log_	
 	
-/*  # --------- PRINT PARAMETERS ------------*/
-	
-	printDetails!: string | null;
+    readerMode!:number;
+    
+	portaIn1!: boolean;
+	portaIn2!: boolean;
+	portaIn3!: boolean;
+	portaIn4!: boolean;
+
+	portaOut1!: boolean;
+	portaOut2!: boolean;
+	portaOut3!: boolean;
+	portaOut4!: boolean;
+
+	autoStartActive!: boolean;
+	numPortaAutostart!: number;
+	autoStartMode!: number;
+	autoStopMode!: number;
 
 
 	private _listAntenna!: Array<Antenna>;

@@ -1,8 +1,8 @@
-<div class="container" style="margin-top: 70px;" class="border-class"  >
+<div class="container" style="margin-top: 70px;" class="border-class">
 
 
 
-  <form [formGroup]="editForm" (ngSubmit)="submit()" *ngIf="editForm" >
+  <form [formGroup]="editForm" (ngSubmit)="submit()" *ngIf="editForm">
 
     <div class="form-group">
       <button class="btn btn-success">
@@ -14,99 +14,146 @@
     </div>
 
 
-   
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="idTipoReader">Seleziona Tipo Reader</label>
-          <select formControlName="idTipoReader" class="form-control" readonly>
-            <option disabled>Seleziona Reader da Configurare</option>
-            <option *ngFor="let tipoReader of tipoReaderList" value="{{tipoReader.id}}" disabled>
-              {{tipoReader.descrizione}}
-            </option>
-          </select>
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="idTipoReader">Seleziona Tipo Reader</label>
+        <select formControlName="idTipoReader" class="form-control" readonly>
+          <option disabled>Seleziona Reader da Configurare</option>
+          <option *ngFor="let tipoReader of tipoReaderList" value="{{tipoReader.id}}" disabled>
+            {{tipoReader.descrizione}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="ipAdress">Indirizzo Ip</label>
+        <input formControlName="ipAdress" id="ipAdress" type="text" class="form-control" readonly>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="readerMode">Reader Mode</label>
+        <select formControlName="readerMode" class="form-control" >
+          <option disabled>Seleziona Reader da Configurare</option>
+          <option *ngFor="let readerModeOption of readerModes" value="{{readerModeOption.id}}" >
+            {{readerModeOption.name}}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="separatore">Separatore</label>
+        <input formControlName="separatore" id="separatore" type="text" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.separatore.errors }" maxlength="1">
+        <div *ngIf="submitted && f.separatore.errors" class="invalid-feedback">
+          <div *ngIf="f.separatore.errors.required">Separatore Obbligatoria.</div>
         </div>
+      </div>
+    </div>
+
+    <div class="form-row">
         <div class="form-group col-md-3">
-          <label for="ipAdress">Indirizzo Ip</label>
-          <input formControlName="ipAdress" id="ipAdress" type="text" class="form-control" readonly>
+          <mat-checkbox formControlName="portaIn1" id="portaIn1">Porta In 1</mat-checkbox>
         </div>
-        
-        <div class="form-group col-md-2">
-          <label for="separatore">Separatore</label>
-          <input formControlName="separatore" id="separatore" type="text" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.separatore.errors }" maxlength="1">
-          <div *ngIf="submitted && f.separatore.errors" class="invalid-feedback">
-            <div *ngIf="f.separatore.errors.required">Separatore Obbligatoria.</div>
-          </div>
+
+        <div class="form-group col-md-3">
+          <mat-checkbox formControlName="portaIn2" id="portaIn2">Porta In 2</mat-checkbox>
         </div>
+
+        <div class="form-group col-md-3">
+          <mat-checkbox formControlName="portaIn3" id="portaIn3">Porta In 3</mat-checkbox>
+        </div>
+
+        <div class="form-group col-md-3">
+          <mat-checkbox formControlName="portaIn4" id="portaIn4">Porta In 4</mat-checkbox>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+          <mat-checkbox formControlName="portaOut1" id="portaOut1">Porta Out 1</mat-checkbox>
+        </div>
+
+        <div class="form-group col-md-3">
+          <mat-checkbox formControlName="portaOut2" id="portaOut2">Porta Out 2</mat-checkbox>
+        </div>
+
+        <div class="form-group col-md-3">
+          <mat-checkbox formControlName="portaOut3" id="portaOut3">Porta Out 3</mat-checkbox>
+        </div>
+
+        <div class="form-group col-md-3">
+          <mat-checkbox formControlName="portaOut4" id="portaOut4">Porta Out 4</mat-checkbox>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+          <mat-checkbox formControlName="autoStartActive" id="autoStartActive">Start/Stop Enable</mat-checkbox>
+        </div>
+
+        <div class="form-group col-md-3">
+          
+            <label for="numPortaAutostart">Numero Porta In Start/Stop </label>
+            <select formControlName="numPortaAutostart"  class="form-control">
+              <option [ngValue]="null" disabled>Seleziona Porta</option>
+              <option *ngFor="let portNumber of portNumbers" [ngValue]="portNumber.id">{{portNumber.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="autoStartMode">Start Mode </label>
+            <select formControlName="autoStartMode" class="form-control">
+              <option [ngValue]="null" disabled>Seleziona</option>
+              <option *ngFor="let startMode of startModes" [ngValue]="startMode.id">{{startMode.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="autoStopMode">Stop Mode </label>
+            <select formControlName="autoStopMode" class="form-control">
+              <option [ngValue]="null" disabled>Seleziona</option>
+              <option *ngFor="let stopMode of stopModes" [ngValue]="stopMode.id">{{stopMode.name}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="createOutFile" id="createOutFile">Out File Log?</mat-checkbox>
       </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-2">
-          <label for="activatePort">Porta Attivata</label>
-          <input formControlName="activatePort" id="activatePort" type="number" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.activatePort.errors }" maxlength="1">
-        </div>
-
-        <div class="form-group col-md-2">
-          <label for="onlinePort">Porta Online</label>
-          <input formControlName="onlinePort" id="onlinePort" type="number" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.onlinePort.errors }" maxlength="1">
-        </div>
-
-        <div class="form-group col-md-2">
-          <label for="greenPort">Porta Verde</label>
-          <input formControlName="greenPort" id="greenPort" type="number" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.greenPort.errors }" maxlength="1">
-        </div>
-
-        <div class="form-group col-md-2">
-          <label for="redPort">Porta Rossa</label>
-          <input formControlName="redPort" id="redPort" type="number" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.redPort.errors }" maxlength="1">
-        </div>
-        <div class="form-group col-md-2">
-          <label for="yellowPort">Porta Gialla</label>
-          <input formControlName="yellowPort" id="yellowPort" type="number" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.yellowPort.errors }" maxlength="1">
-        </div>
+      <div class="form-group col-md-3">
+        <label for="nameOutLog">Name Out Log</label>
+        <input formControlName="nameOutLog" id="nameOutLog" type="text" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.nameOutLog.errors }" maxlength="20">
       </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <mat-checkbox formControlName="createOutFile" id="createOutFile">Out File Log?</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
+        <label for="extentionOutLog">Extention Out Log</label>
+        <input formControlName="extentionOutLog" id="extentionOutLog" type="text" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.extentionOutLog.errors }" maxlength="20">
+      </div>
+    </div>
 
-        <div class="form-group col-md-4">
-          <label for="nameOutLog">Name Out Log</label>
-          <input formControlName="nameOutLog" id="nameOutLog" type="text" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.nameOutLog.errors }" maxlength="20">
-        </div>
-
-        <div class="form-group col-md-4">
-          <label for="extentionOutLog">Extention Out Log</label>
-          <input formControlName="extentionOutLog" id="extentionOutLog" type="text" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.extentionOutLog.errors }" maxlength="20">
-        </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="createErrFile" id="createErrFile">Create Err File?</mat-checkbox>
       </div>
 
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <mat-checkbox formControlName="createErrFile" id="createErrFile">Create Err File?</mat-checkbox>
-        </div>
-
-        <div class="form-group col-md-4">
-          <label for="nameErrLog">Name Err Log</label>
-          <input formControlName="nameErrLog" id="nameErrLog" type="text" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.nameErrLog.errors }" maxlength="20">
-        </div>
-
-        <div class="form-group col-md-4">
-          <label for="extentionErrLog">Extention Err Log</label>
-          <input formControlName="extentionErrLog" id="extentionErrLog" type="text" class="form-control"
-            [ngClass]="{ 'is-invalid': submitted && f.extentionErrLog.errors }" maxlength="20">
-        </div>
-
+      <div class="form-group col-md-3">
+        <label for="nameErrLog">Name Err Log</label>
+        <input formControlName="nameErrLog" id="nameErrLog" type="text" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.nameErrLog.errors }" maxlength="20">
       </div>
+
+      <div class="form-group col-md-3">
+        <label for="extentionErrLog">Extention Err Log</label>
+        <input formControlName="extentionErrLog" id="extentionErrLog" type="text" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.extentionErrLog.errors }" maxlength="20">
+      </div>
+
+    </div>
 
   </form>
 
