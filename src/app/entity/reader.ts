@@ -35,6 +35,13 @@ export class Reader {
 	autoStartMode!: number;
 	autoStopMode!: number;
 
+	enableUserTid!: boolean;
+	idUser!: number;
+	idTid!: number;
+
+	
+
+
 
 	private _listAntenna!: Array<Antenna>;
   

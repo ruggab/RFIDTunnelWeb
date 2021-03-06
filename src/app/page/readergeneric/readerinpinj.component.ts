@@ -70,8 +70,10 @@ export class ReaderInpinjComponent extends ReaderGenericComponent implements OnI
             extentionOutLog: [this.selectedReader.extentionOutLog],
             createErrFile: [this.selectedReader.createErrFile],
             nameErrLog: [this.selectedReader.nameErrLog],
-            extentionErrLog: [this.selectedReader.extentionErrLog]
-
+            extentionErrLog: [this.selectedReader.extentionErrLog],
+            enableUserTid: [this.selectedReader.enableUserTid],
+            idUser: [this.selectedReader.idUser],
+            idTid: [this.selectedReader.idTid]
         });
       })   
   }
