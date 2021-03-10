@@ -59,8 +59,8 @@
 
            
             <p>
-                <mat-form-field>
-                    <input type="text"  matInput placeholder="Indirizzo Ip" formControlName="ipAdress">
+                <mat-form-field>   
+                    <input type="text" [textMask]="{mask: ipadressmask}"  matInput placeholder='Ip Adress' formControlName="ipAdress">
                 </mat-form-field>
             </p>
 

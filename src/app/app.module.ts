@@ -20,6 +20,7 @@ import { ReaderComponent } from './page/reader/reader.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { AntennaComponent } from './page/antenna/antenna.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AntennaComponent } from './page/antenna/antenna.component';
     ReaderComponent,
     AntennaComponent,
     ControlPanelComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { AntennaComponent } from './page/antenna/antenna.component';
     ReactiveFormsModule,
     NgSelectModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    TextMaskModule
   
   ],
   providers: [],

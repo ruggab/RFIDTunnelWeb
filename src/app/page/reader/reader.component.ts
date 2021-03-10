@@ -13,8 +13,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./reader.component.css']
 })
 export class ReaderComponent implements OnInit {
-
-  
+ // ng-pattern='/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/' 
+  ipadressmask = [/\d/, /\d/,/\d/,'.', /\d/,/\d/,/\d/,'.', /\d/,/\d/,/\d/,'.', /\d/,/\d/,/\d/];
   tipoReaderList:  Array<TipoReader> = [];
   
   isLoading = false;
