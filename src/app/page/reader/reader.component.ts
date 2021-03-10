@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { Reader } from 'src/app/entity/reader';
 import { ReaderService } from "../../services/reader.service";
 import { TipoReader } from 'src/app/entity/tipoReader';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -13,8 +12,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./reader.component.css']
 })
 export class ReaderComponent implements OnInit {
- // ng-pattern='/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/' 
-  ipadressmask = [/\d/, /\d/,/\d/,'.', /\d/,/\d/,/\d/,'.', /\d/,/\d/,/\d/,'.', /\d/,/\d/,/\d/];
+  //ipadressmask='/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/' 
+  //ipadressmask = [/[1-2]/,/[0-5]/,/[0-5]/,'.',/\d?/,/\d?/,/\d?/,'.', /\d?/,/\d?/,/\d?/,'.',/\d?/,/\d?/,/\d?/];
+  //ipadressmask = [/^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/];
+  
+  
   tipoReaderList:  Array<TipoReader> = [];
   
   isLoading = false;
@@ -30,7 +32,8 @@ export class ReaderComponent implements OnInit {
     idTipoReader: new FormControl('', [Validators.required]),
     ipAdress: new FormControl('', [Validators.required, Validators.maxLength(15)]),
     porta: new FormControl('', [ Validators.maxLength(4)]),
-    separatore: new FormControl('', [Validators.required, Validators.maxLength(1)])
+    separatore: new FormControl('', [Validators.required, Validators.maxLength(1)]),
+    keepElive: new FormControl(false)
   });
  
   ngOnInit() { 

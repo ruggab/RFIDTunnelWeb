@@ -58,9 +58,15 @@
             
 
            
-            <p>
+            <!--p>
                 <mat-form-field>   
                     <input type="text" [textMask]="{mask: ipadressmask}"  matInput placeholder='Ip Adress' formControlName="ipAdress">
+                </mat-form-field>
+            </p-->
+
+            <p>
+                <mat-form-field >
+                    <input matInput placeholder="Ip Adress" formControlName="ipAdress"  required pattern="^([0-9]{1,3}\.){3}[0-9]{1,3}$" />
                 </mat-form-field>
             </p>
 
@@ -85,7 +91,11 @@
                     </mat-form-field>
                 </p>
             </div>
-
+            <p>
+                
+                    <mat-checkbox formControlName="keepElive" id="keepElive" >Keep Elive</mat-checkbox>
+                
+            </p>
 
             <p>
                 <mat-form-field>

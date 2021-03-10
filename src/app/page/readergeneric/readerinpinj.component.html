@@ -33,107 +33,103 @@
 
       <div class="form-group col-md-3">
         <label for="readerMode">Reader Mode</label>
-        <select formControlName="readerMode" class="form-control" >
+        <select formControlName="readerMode" class="form-control">
           <option disabled>Seleziona Reader da Configurare</option>
-          <option *ngFor="let readerModeOption of readerModes" value="{{readerModeOption.id}}" >
+          <option *ngFor="let readerModeOption of readerModes" value="{{readerModeOption.id}}">
             {{readerModeOption.name}}
           </option>
         </select>
       </div>
 
       <div class="form-group col-md-3">
-        <label for="separatore">Separatore</label>
-        <input formControlName="separatore" id="separatore" type="text" class="form-control"
-          [ngClass]="{ 'is-invalid': submitted && f.separatore.errors }" maxlength="1">
-        <div *ngIf="submitted && f.separatore.errors" class="invalid-feedback">
-          <div *ngIf="f.separatore.errors.required">Separatore Obbligatoria.</div>
-        </div>
+        <mat-checkbox formControlName="keepAlive" id="keepAlive">Keep Alive</mat-checkbox>
+      </div>
+    </div>
+
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="portaIn1" id="portaIn1">Porta In 1</mat-checkbox>
+      </div>
+
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="portaIn2" id="portaIn2">Porta In 2</mat-checkbox>
+      </div>
+
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="portaIn3" id="portaIn3">Porta In 3</mat-checkbox>
+      </div>
+
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="portaIn4" id="portaIn4">Porta In 4</mat-checkbox>
       </div>
     </div>
 
     <div class="form-row">
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="portaIn1" id="portaIn1">Porta In 1</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="portaOut1" id="portaOut1">Porta Out 1</mat-checkbox>
+      </div>
 
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="portaIn2" id="portaIn2">Porta In 2</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="portaOut2" id="portaOut2">Porta Out 2</mat-checkbox>
+      </div>
 
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="portaIn3" id="portaIn3">Porta In 3</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="portaOut3" id="portaOut3">Porta Out 3</mat-checkbox>
+      </div>
 
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="portaIn4" id="portaIn4">Porta In 4</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="portaOut4" id="portaOut4">Porta Out 4</mat-checkbox>
+      </div>
     </div>
 
     <div class="form-row">
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="portaOut1" id="portaOut1">Porta Out 1</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="autoStartActive" id="autoStartActive">Start/Stop Enable</mat-checkbox>
+      </div>
 
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="portaOut2" id="portaOut2">Porta Out 2</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
 
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="portaOut3" id="portaOut3">Porta Out 3</mat-checkbox>
-        </div>
+        <label for="numPortaAutostart">Numero Porta In Start/Stop </label>
+        <select formControlName="numPortaAutostart" class="form-control">
+          <option [ngValue]="null" disabled>Seleziona Porta</option>
+          <option *ngFor="let portNumber of portNumbers" [ngValue]="portNumber.id">{{portNumber.name}}</option>
+        </select>
+      </div>
 
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="portaOut4" id="portaOut4">Porta Out 4</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
+        <label for="autoStartMode">Start Mode </label>
+        <select formControlName="autoStartMode" class="form-control">
+          <option [ngValue]="null" disabled>Seleziona</option>
+          <option *ngFor="let startMode of startModes" [ngValue]="startMode.id">{{startMode.name}}</option>
+        </select>
+      </div>
+
+      <div class="form-group col-md-3">
+        <label for="autoStopMode">Stop Mode </label>
+        <select formControlName="autoStopMode" class="form-control">
+          <option [ngValue]="null" disabled>Seleziona</option>
+          <option *ngFor="let stopMode of stopModes" [ngValue]="stopMode.id">{{stopMode.name}}</option>
+        </select>
+      </div>
     </div>
 
     <div class="form-row">
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="autoStartActive" id="autoStartActive">Start/Stop Enable</mat-checkbox>
-        </div>
+      <div class="form-group col-md-3">
+        <mat-checkbox formControlName="enableUserTid" id="enableUserTid">USER & TID</mat-checkbox>
+      </div>
 
-        <div class="form-group col-md-3">
-          
-            <label for="numPortaAutostart">Numero Porta In Start/Stop </label>
-            <select formControlName="numPortaAutostart"  class="form-control">
-              <option [ngValue]="null" disabled>Seleziona Porta</option>
-              <option *ngFor="let portNumber of portNumbers" [ngValue]="portNumber.id">{{portNumber.name}}</option>
-            </select>
-        </div>
+      <div class="form-group col-md-3">
+        <label for="idUser">Id User</label>
+        <input formControlName="idUser" id="idUser" type="number" class="form-control" maxlength="3">
+      </div>
 
-        <div class="form-group col-md-3">
-            <label for="autoStartMode">Start Mode </label>
-            <select formControlName="autoStartMode" class="form-control">
-              <option [ngValue]="null" disabled>Seleziona</option>
-              <option *ngFor="let startMode of startModes" [ngValue]="startMode.id">{{startMode.name}}</option>
-            </select>
-        </div>
+      <div class="form-group col-md-3">
+        <label for="idTid">Id TID</label>
+        <input formControlName="idTid" id="idTid" type="number" class="form-control" maxlength="3">
+      </div>
 
-        <div class="form-group col-md-3">
-            <label for="autoStopMode">Stop Mode </label>
-            <select formControlName="autoStopMode" class="form-control">
-              <option [ngValue]="null" disabled>Seleziona</option>
-              <option *ngFor="let stopMode of stopModes" [ngValue]="stopMode.id">{{stopMode.name}}</option>
-            </select>
-        </div>
     </div>
-
-    <div class="form-row">
-        <div class="form-group col-md-3">
-          <mat-checkbox formControlName="enableUserTid" id="enableUserTid">USER & TID</mat-checkbox>
-        </div>
-
-        <div class="form-group col-md-3">
-          <label for="idUser">Id User</label>
-          <input formControlName="idUser" id="idUser" type="number" class="form-control" maxlength="3"  >
-        </div>
-
-        <div class="form-group col-md-3">
-          <label for="idTid">Id TID</label>
-          <input formControlName="idTid" id="idTid" type="number" class="form-control" maxlength="3"  >
-        </div>
-      
-  </div>
 
     <div class="form-row">
       <div class="form-group col-md-3">
@@ -171,6 +167,18 @@
       </div>
 
     </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="separatore">Separatore</label>
+        <input formControlName="separatore" id="separatore" type="text" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.separatore.errors }" maxlength="1">
+        <div *ngIf="submitted && f.separatore.errors" class="invalid-feedback">
+          <div *ngIf="f.separatore.errors.required">Separatore Obbligatoria.</div>
+        </div>
+      </div>
+    </div>
+
 
   </form>
 

@@ -9,6 +9,8 @@ export class Reader {
   separatore!: string | null;
   numAntenne!: string | null;
   portaComandi!: string | null;
+  keepElive!: boolean;
+
   
 //	--------- LOG FILE PARAMETERS -----------
     createOutFile!: boolean; 	//S/N	
