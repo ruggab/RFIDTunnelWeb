@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ReaderComponent implements OnInit {
 
-  selectedReader: Reader = new Reader();
+  
   tipoReaderList:  Array<TipoReader> = [];
   
   isLoading = false;
