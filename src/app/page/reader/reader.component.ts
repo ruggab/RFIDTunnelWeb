@@ -33,7 +33,7 @@ export class ReaderComponent implements OnInit {
     ipAdress: new FormControl('', [Validators.required, Validators.maxLength(15)]),
     porta: new FormControl('', [ Validators.maxLength(4)]),
     separatore: new FormControl('', [Validators.required, Validators.maxLength(1)]),
-    keepElive: new FormControl(false)
+    keepAlive: new FormControl(false)
   });
  
   ngOnInit() { 
