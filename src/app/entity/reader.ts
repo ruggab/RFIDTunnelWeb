@@ -1,3 +1,4 @@
+import { Timestamp } from "rxjs";
 
 
 export class Reader {
@@ -68,6 +69,20 @@ export class Antenna {
 	powerinDbm!:number;
 	sensitivityinDbm!:number;
 }
+
+
+
+export class ReaderStream {
+
+    id!: number;
+	ipAdress!:string;
+	port!:string;
+	epc!:string;
+	tid!:string;
+	packId!: number;
+	timeStamp!:Date;
+}
+	
 
 
 

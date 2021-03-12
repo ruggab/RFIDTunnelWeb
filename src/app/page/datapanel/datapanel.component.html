@@ -1,0 +1,47 @@
+<div class="container" style="margin-top: 70px;">
+
+
+
+  <mat-table [dataSource]="dataReaderList" matSort class="mat-elevation-z8">
+    
+
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef> id </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="ipAdress">
+      <mat-header-cell *matHeaderCellDef > Indirizzo Ip </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.ipAdress}} </mat-cell>
+    </ng-container>
+
+    
+    <ng-container matColumnDef="epc">
+      <mat-header-cell *matHeaderCellDef > EPC </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.epc}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="tid">
+      <mat-header-cell *matHeaderCellDef > TID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.tid}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="packId">
+      <mat-header-cell *matHeaderCellDef > PackId </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.packId}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="timeStamp">
+      <mat-header-cell *matHeaderCellDef > Time </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.timeStamp}} </mat-cell>
+    </ng-container>
+    
+
+    <mat-header-row *matHeaderRowDef="['id', 'ipAdress', 'epc', 'tid', 'packId', 'timeStamp']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['id', 'ipAdress', 'epc', 'tid', 'packId', 'timeStamp']"></mat-row>
+
+
+  </mat-table>
+
+</div>

@@ -78,5 +78,9 @@ export class ReaderService {
     return this.http.post(`${baseUrl}`, readerForm);
   }
 
+  getDataReaderList(): Observable<any> {
+    let baseUrl = 'http://localhost:8080/api/v1/allDataReader';
+    return this.http.get(`${baseUrl}`);
+  }
   
 }
