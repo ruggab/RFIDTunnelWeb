@@ -1,12 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { ReaderService } from "../../services/reader.service";
 import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent} from '../common/modal/modal.component'
 import {  HttpErrorResponse } from "@angular/common/http";
-import { Reader } from 'src/app/entity/reader';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { MatPaginator } from '@angular/material/paginator';
+import { ReaderStream } from 'src/app/entity/reader';
 
 @Component({
   selector: 'app-controlpanel',
@@ -16,13 +16,17 @@ import { MatSort } from '@angular/material/sort';
 
 export class DataPanelComponent implements OnInit {
   
-  dataReaderList : any;
+  dataReaderList!: MatTableDataSource<ReaderStream>;
+ 
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
 
   constructor(public readerService: ReaderService, public modalService: NgbModal) { 
    
   }
+
+  
   
   ngOnInit(): void {
     this.onload();
@@ -37,6 +41,7 @@ export class DataPanelComponent implements OnInit {
       data => {
         console.log(data);
         this.dataReaderList = new MatTableDataSource(data);
+        this.dataReaderList.paginator = this.paginator;
         this.dataReaderList.sort = this.sort;
       },error => {
         console.log(error);
@@ -57,6 +62,14 @@ export class DataPanelComponent implements OnInit {
     modalRef.componentInstance.msg = respose.msg;
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataReaderList.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataReaderList.paginator) {
+      this.dataReaderList.paginator.firstPage();
+    }
+  }
 
 }
  
